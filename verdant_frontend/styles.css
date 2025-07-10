@@ -13,7 +13,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/image.png'); /* example image */
+  background-image: url('/verdant_frontend/image.png'); /* example image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
