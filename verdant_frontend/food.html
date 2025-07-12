@@ -372,6 +372,16 @@
         e.target.closest('.ingredient-row').remove();
       }
     });
+    document.addEventListener("DOMContentLoaded", function() {
+  const inputs = document.querySelectorAll('input[type="number"]');
+  inputs.forEach(input => {
+    input.min = "0";
+    input.addEventListener('input', function() {
+      if (this.value < 0) this.value = 0;
+    });
+  });
+});
+
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
