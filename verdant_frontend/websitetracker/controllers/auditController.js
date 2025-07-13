@@ -5,6 +5,9 @@ const { runEcoIndexAnalysis } = require('../services/ecoindexService');
 const { applyHeuristics } = require('../services/heuristicsService');
 const { scrapeDetailedPageData, breakdownResources } = require('../services/pageAnalysisService');
 
+// Import the new Mongoose model
+const AuditReport = require('../models/AuditReport');
+
 exports.auditWebsite = async (req, res) => {
   try {
     const { url } = req.body;
@@ -34,8 +37,8 @@ exports.auditWebsite = async (req, res) => {
       ? 'Optimized'
       : 'Needs Improvement';
 
-    // 8️⃣ Return consolidated result
-    res.status(200).json({
+    // 8️⃣ Create the audit report object
+    const auditReport = {
       url,
       lighthouseScore,
       carbonAnalysis,
@@ -43,12 +46,23 @@ exports.auditWebsite = async (req, res) => {
       heuristics,
       greenHosting,
       verdict,
-      pageDetails: detailedData.domData,
-      assetBreakdown: breakdown
+      breakdown,
+      pageAnalysis: detailedData.domData
+    };
+
+    // 9️⃣ Save the report to MongoDB
+    const newReport = new AuditReport(auditReport);
+    await newReport.save();
+    console.log('✅ Audit report saved to MongoDB:', newReport._id);
+
+    // 🔟 Send a success response back to the frontend
+    res.status(200).json({
+      message: 'Audit complete. Report saved to MongoDB.',
+      reportId: newReport._id
     });
 
-  } catch (err) {
-    console.error('Audit Error:', err);
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    console.error('Audit failed:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };

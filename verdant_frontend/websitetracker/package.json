@@ -16,6 +16,9 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "lighthouse": "^11.5.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.3",
+    "moongoose": "^0.0.5",
     "puppeteer": "^22.0.0"
   }
 }

@@ -1,33 +1,37 @@
+// server.js
+require('dotenv').config(); // Load environment variables FIRST
+
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // Add this to work with file paths
+const path = require('path');
+const mongoose = require('mongoose');
 const app = express();
-const { port } = require('./config/config');
+
+// Now, safely import from config.js after dotenv has run
+const { port, greenWebAPI, mongoURI } = require('./config/config');
 const auditRoutes = require('./routes/auditRoutes');
+
+// --- Debugging: Check if mongoURI is loaded ---
+console.log('DEBUG: mongoURI from config:', mongoURI);
+if (!mongoURI) {
+    console.error('CRITICAL ERROR: MONGODB_URI is not defined in your .env file or config.js');
+    process.exit(1); // Exit the process if URI is missing
+}
+// ---------------------------------------------
+
+
+// Connect to MongoDB
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch(err => console.error('❌ MongoDB connection error:', err.message)); // Log only the message for clarity
 
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the 'public' directory
-// This line should ideally be before other routes if you want
-// it to serve index.html for the root path by default.
-app.use(express.static(path.join(__dirname, 'public'))); // Using path.join for better path resolution
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API routes
 app.use('/api', auditRoutes);
-
-// Optional: If you want to explicitly serve index.html for the root,
-// and ensure it's picked up even if other static files exist,
-// you can do this, but `express.static` usually handles it automatically
-// for 'index.html' within the static directory.
-// If you remove the `app.get('/')` above, express.static('public') will
-// automatically serve public/index.html when accessing /.
-// So, you don't *need* this specific route if `express.static` is correctly configured.
-/*
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-*/
 
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
