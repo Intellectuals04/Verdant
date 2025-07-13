@@ -5,9 +5,6 @@ const { runEcoIndexAnalysis } = require('../services/ecoindexService');
 const { applyHeuristics } = require('../services/heuristicsService');
 const { scrapeDetailedPageData, breakdownResources } = require('../services/pageAnalysisService');
 
-// Import the new Mongoose model
-const AuditReport = require('../models/AuditReport');
-
 exports.auditWebsite = async (req, res) => {
   try {
     const { url } = req.body;
@@ -25,20 +22,25 @@ exports.auditWebsite = async (req, res) => {
     // 4️⃣ Apply custom heuristics
     const heuristics = await applyHeuristics(resourceData);
 
-    // 5️⃣ Check green hosting status (if still used)
+    // 5️⃣ Check green hosting status
     const greenHosting = await checkGreenHosting(url);
 
     // 6️⃣ In-depth page & resource analysis
     const detailedData = await scrapeDetailedPageData(url);
     const breakdown = breakdownResources(detailedData.resources);
 
-    // 7️⃣ Final Verdict Logic
-    const verdict = (lighthouseScore > 60 && carbonAnalysis.co2PerVisit < 0.8 && greenHosting)
-      ? 'Optimized'
-      : 'Needs Improvement';
+    // 7️⃣ Determine individual verdicts
+    const lighthouseVerdict = lighthouseScore > 60 ? 'Optimized' : 'Needs Improvement';
+    const carbonVerdict = (carbonAnalysis.co2PerVisit < 0.8) ? 'Optimized' : 'Needs Improvement';
+    const hostingVerdict = greenHosting ? 'Optimized' : 'Needs Improvement';
 
-    // 8️⃣ Create the audit report object
-    const auditReport = {
+    // 8️⃣ Overall Verdict based on all three
+    const verdict = (lighthouseVerdict === 'Optimized' && carbonVerdict === 'Optimized' && hostingVerdict === 'Optimized')
+      ? 'Overall Optimized'
+      : 'Overall Needs Improvement';
+
+    // 9️⃣ Return a comprehensive report with detailed verdicts
+    res.status(200).json({
       url,
       lighthouseScore,
       carbonAnalysis,
@@ -46,23 +48,17 @@ exports.auditWebsite = async (req, res) => {
       heuristics,
       greenHosting,
       verdict,
-      breakdown,
-      pageAnalysis: detailedData.domData
-    };
-
-    // 9️⃣ Save the report to MongoDB
-    const newReport = new AuditReport(auditReport);
-    await newReport.save();
-    console.log('✅ Audit report saved to MongoDB:', newReport._id);
-
-    // 🔟 Send a success response back to the frontend
-    res.status(200).json({
-      message: 'Audit complete. Report saved to MongoDB.',
-      reportId: newReport._id
+      detailedVerdicts: {
+        lighthouse: lighthouseVerdict,
+        carbon: carbonVerdict,
+        hosting: hostingVerdict
+      },
+      pageDetails: detailedData.domData,
+      assetBreakdown: breakdown
     });
 
-  } catch (error) {
-    console.error('Audit failed:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+  } catch (err) {
+    console.error('Audit Error:', err);
+    res.status(500).json({ error: err.message });
   }
 };

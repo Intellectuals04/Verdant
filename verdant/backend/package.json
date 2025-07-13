@@ -9,16 +9,16 @@
   "keywords": [],
   "author": "Tanishq",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.7.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "express": "^4.19.2",
     "lighthouse": "^11.5.0",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.3",
-    "moongoose": "^0.0.5",
     "puppeteer": "^22.0.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
