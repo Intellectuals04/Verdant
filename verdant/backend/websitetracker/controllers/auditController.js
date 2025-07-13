@@ -22,19 +22,24 @@ exports.auditWebsite = async (req, res) => {
     // 4️⃣ Apply custom heuristics
     const heuristics = await applyHeuristics(resourceData);
 
-    // 5️⃣ Check green hosting status (if still used)
+    // 5️⃣ Check green hosting status
     const greenHosting = await checkGreenHosting(url);
 
     // 6️⃣ In-depth page & resource analysis
     const detailedData = await scrapeDetailedPageData(url);
     const breakdown = breakdownResources(detailedData.resources);
 
-    // 7️⃣ Final Verdict Logic
-    const verdict = (lighthouseScore > 60 && carbonAnalysis.co2PerVisit < 0.8 && greenHosting)
-      ? 'Optimized'
-      : 'Needs Improvement';
+    // 7️⃣ Determine individual verdicts
+    const lighthouseVerdict = lighthouseScore > 60 ? 'Optimized' : 'Needs Improvement';
+    const carbonVerdict = (carbonAnalysis.co2PerVisit < 0.8) ? 'Optimized' : 'Needs Improvement';
+    const hostingVerdict = greenHosting ? 'Optimized' : 'Needs Improvement';
 
-    // 8️⃣ Return consolidated result
+    // 8️⃣ Overall Verdict based on all three
+    const verdict = (lighthouseVerdict === 'Optimized' && carbonVerdict === 'Optimized' && hostingVerdict === 'Optimized')
+      ? 'Overall Optimized'
+      : 'Overall Needs Improvement';
+
+    // 9️⃣ Return a comprehensive report with detailed verdicts
     res.status(200).json({
       url,
       lighthouseScore,
@@ -43,6 +48,11 @@ exports.auditWebsite = async (req, res) => {
       heuristics,
       greenHosting,
       verdict,
+      detailedVerdicts: {
+        lighthouse: lighthouseVerdict,
+        carbon: carbonVerdict,
+        hosting: hostingVerdict
+      },
       pageDetails: detailedData.domData,
       assetBreakdown: breakdown
     });

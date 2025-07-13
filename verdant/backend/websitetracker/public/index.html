@@ -11,17 +11,25 @@
       crossorigin="anonymous"
     />
     <style>
-      /* Optional: Adjust main content to not overlap with fixed footer */
       body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
       }
       .container-fluid.p-0 {
-        flex-grow: 1; /* Allows the main content to take available space */
+        flex-grow: 1;
       }
       footer {
-        flex-shrink: 0; /* Prevents footer from shrinking */
+        flex-shrink: 0;
+      }
+      .spinner-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+      }
+      #loadingSpinner {
+        display: none;
       }
     </style>
   </head>
@@ -33,7 +41,6 @@
     >
       <div class="container">
         <a class="navbar-brand fw-bold" href="#">Verdant</a>
-
         <button
           class="navbar-toggler"
           type="button"
@@ -45,7 +52,6 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -75,12 +81,10 @@
         class="img-fluid w-100"
         style="height: auto"
       />
-
       <div
         class="position-absolute top-0 start-0 w-100 h-100"
         style="background-color: rgba(59, 57, 57, 0.4)"
       ></div>
-
       <div
         class="position-absolute top-50 start-50 translate-middle w-100 px-3"
         style="max-width: 700px"
@@ -88,18 +92,27 @@
         <div class="card shadow-lg">
           <div class="card-body text-center">
             <h3 class="mb-4">Enter Website URL</h3>
-            <form id="auditForm"> <div class="input-group">
+            <form id="auditForm">
+              <div class="input-group">
                 <input
                   type="url"
-                  id="urlInput" name="websiteUrl"
+                  id="urlInput"
+                  name="websiteUrl"
                   class="form-control"
                   placeholder="https://example.com"
                   required
                 />
-                <button class="btn btn-success" type="submit">Analyze</button>
+                <button class="btn btn-success" type="submit" id="analyzeButton">
+                  Analyze
+                </button>
+                <div class="spinner-container" id="loadingSpinner">
+                  <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
               </div>
               <div class="form-text mt-2 text-muted">
-                We’ll analyze the carbon footprint of your website.
+                We'll analyze the carbon footprint of your website.
               </div>
             </form>
           </div>
@@ -136,16 +149,20 @@
 
     <script>
       document.getElementById('auditForm').addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent the default form submission that causes a page reload
+        event.preventDefault();
 
         const url = document.getElementById('urlInput').value;
+        const analyzeButton = document.getElementById('analyzeButton');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
         if (!url) {
           alert("Please enter a URL to audit.");
           return;
         }
-
+        analyzeButton.disabled = true;
+        analyzeButton.textContent = 'Analyzing...';
+        loadingSpinner.style.display = 'flex';
         try {
-          // Assuming your backend is running on http://localhost:3000 as per config.js and server.js
           const response = await fetch('http://localhost:3000/api/audit', {
             method: 'POST',
             headers: {
@@ -153,21 +170,22 @@
             },
             body: JSON.stringify({ url })
           });
-
           if (!response.ok) {
-            const errorData = await response.json().catch(() => response.text()); // Try to parse JSON error, fall back to text
+            const errorData = await response.json().catch(() => response.text());
             throw new Error(`Server error: ${typeof errorData === 'object' && errorData.error ? errorData.error : errorData}`);
           }
-
           const result = await response.json();
           downloadJSON(result, 'audit-report.json');
 
         } catch (error) {
           console.error('Audit failed:', error);
           alert(`Audit failed: ${error.message}`);
+        } finally {
+          analyzeButton.disabled = false;
+          analyzeButton.textContent = 'Analyze';
+          loadingSpinner.style.display = 'none';
         }
       });
-
       function downloadJSON(data, filename) {
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -175,9 +193,9 @@
         a.href = url;
         a.download = filename;
         document.body.appendChild(a);
-        a.click(); // Programmatically click the link to trigger the download
+        a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(url); // Clean up the object URL
+        URL.revokeObjectURL(url);
       }
     </script>
   </body>
