@@ -59,6 +59,14 @@
       color: white !important;
       opacity: 1;
     }
+    .custom-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: #0b342e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 10px center;
+      background-size: 14px;
+      padding-right: 25px;
+    }
   </style>
 </head>
 
@@ -97,165 +105,182 @@
 
 
     <div class="container my-5">
-      <div class="row justify-content-center align-items-center">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="rounded shadow" style="background: white; border-radius: 15px; overflow: hidden;">
 
-        <div class="container my-5">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <div class="rounded shadow" style="background: white; border-radius: 15px; overflow: hidden;">
+        <!-- Header -->
+        <div style="background-color: #0b342e; color: white; padding: 15px 20px;">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Select Your Food Type:</h5>
+            <select id="mainSelect" class="form-control text-center text-white custom-select ingredient-heading"
+              style="width: 140px; border-radius: 20px; background-color: #0b342e; border: 1px solid white;">
+              <option value="" disabled selected>Food</option>
+              <option value="clothing">Vegetarian</option>
+              <option value="grocery">Non-Vegetarian</option>
+            </select>
+          </div>
+        </div>
 
-                <!-- Header -->
-                <div style="background-color: #0b342e; color: white; padding: 15px 20px;">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Enter approximate number of servings:</h5>
-                    <input type="number" class="form-control text-center text-white  placeholder-white" placeholder="1"
-                      style="width: 100px; border-radius: 20px; background-color: #0b342e; color: white; border: 1px solid white;">
-                  </div>
+        <!-- Vegetarian section -->
+        <div id="vegetarianSection" class="p-4 d-none">
+          <div class="row fw-bold mb-3">
+            <div class="col-4">Select the food item</div>
+            <div class="col-4">Quantity/Servings</div>
+            <div class="col-2">Weight</div>
+          </div>
+          <form>
+            <div id="vegetarianFields">
+              <div class="row mb-3 align-items-center ingredient-row">
+                <div class="col-4">
+                  <select class="form-select" name="ingredient[]">
+                    <option selected disabled>Choose an ingredient</option>
+                    <optgroup label="Vegetarian Options">
+                      <optgroup label="Single items">
+                        <option value="roti">Roti</option>
+                        <option value="Rice">Rice</option>
+                        <option value="Dal">Dal</option>
+                        <option value="Paneer">Paneer</option>
+                        <option value="Milk">Milk</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Oil">Oil</option>
+                        <option value="Curd">Curd</option>
+                        <option value="Butter">Butter</option>
+                        <option value="Cheese">Cheese</option>
+                        <option value="Chhole">Chhole</option>
+                        <option value="Aloo paratha">Aloo paratha</option>
+                        <option value="Kadhi">Kadhi</option>
+                        <option value="Veg Pulao">Veg Pulao</option>
+                        <option value="Maggi">Maggi</option>
+                      </optgroup>
+                      <optgroup label="Dishes">
+                        <option value="Chhole Bhature">Chhole Bhature</option>
+                        <option value="Idli Sambhar">Idli Sambhar</option>
+                        <option value="Paneer Tikka">Paneer Tikka</option>
+                        <option value="Veg Biryani">Veg Biryani</option>
+                        <option value="Rajma Chawal">Rajma Chawal</option>
+                        <option value="Aloo Paratha">Aloo Paratha</option>
+                        <option value="Samosa">Samosa</option>
+                        <option value="Masala Dosa">Masala Dosa</option>
+                        <option value="Pav Bhaji">Pav Bhaji</option>
+                        <option value="Kadhi Chawal">Kadhi Chawal</option>
+                        <option value="Vegetable Sandwich">Vegetable Sandwich</option>
+                        <option value="Poha">Poha</option>
+                        <option value="Upma">Upma</option>
+                        <option value="Veg Momos">Veg Momos </option>
+                        <option value="Dhokla">Dhokla</option>
+                      </optgroup>
+                    </optgroup>
+                  </select>
                 </div>
 
-                <!-- Input Section -->
-                <div class="p-4">
+                <div class="col-4">
+                  <input type="number" class="form-control" name="Quantity[]" placeholder="Units Consumed" min="1" required>
+                </div>
+                <div class="col-2">
+                  <select class="form-select" name="weightUnit[]">
+                    <option selected disabled>Unit</option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="piece">piece</option>
+                    <option value="cup">cup</option>
+                    <option value="plate">plate</option>
+                  </select>
+                </div>
+                <div class="col-2 text-end">
+                  <button type="button"
+                    class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-link fw-bold" id="addVegetarian">+ Add more</button>
+            <button type="submit" class="btn btn-sm px-4 py-2 shadow float-end"
+              style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">Calculate</button>
+          </form>
+        </div>
 
-                  <!-- Servings input with small calculate button on right -->
+        <!-- Non-Vegetarian section -->
+        <div id="nonVegSection" class="p-4 d-none">
+          <div class="row fw-bold mb-3">
+            <div class="col-4">Select the food item</div>
+            <div class="col-4">Quantity/Servings</div>
+            <div class="col-2">Weight</div>
+          </div>
+          <form>
+            <div id="nonVegFields">
+              <div class="row mb-3 align-items-center ingredient-row">
+                <div class="col-4">
+                  <select class="form-select" name="ingredient[]">
+                    <option selected disabled>Choose an ingredient</option>
+                    <optgroup label="Non-Vegetarian Options">
+                      <optgroup label="Single Items">
+                        <option value="Chicken">Chicken</option>
+                        <option value="Egg">Egg</option>
+                        <option value="Fish">Fish</option>
+                        <option value="Mutton">Mutton</option>
+                        <option value="Chicken Curry">Chicken Curry</option>
+                        <option value="Egg Curry">Egg Curry</option>
+                        <option value="Fish Curry">Fish Curry</option>
+                        <option value="Omlette">Omlette</option>
+                        <option value="Chicken Biryani">Chicken Biryani</option>
+                        <option value="Mutton Biryani">Mutton Biryani</option>
+                        <option value="Egg Biryani">Egg Biryani</option>
+                        <option value="Egg Roll">Egg Roll</option>
+                        <option value="Chicken Roll">Chicken Roll</option>
+                        <option value="Fish Fry">Fish Fry</option>
+                        <option value="Chicken Tikka">Chicken Tikka</option>
+                      </optgroup>
+                      <optgroup label="Dishes">
+                        <option value="Butter Chicken with Naan">Butter Chicken with Naan</option>
+                        <option value="Fish Curry">Fish Curry</option>
+                        <option value="Egg Curry">Egg Curry</option>
+                        <option value="Chicken Biryani ">Chicken Biryani</option>
+                        <option value="Mutton Rogan Josh">Mutton Rogan Josh</option>
+                        <option value="Prawn Masala">Prawn Masala</option>
+                        <option value="Fried Fish">Fried Fish</option>
+                        <option value="Grilled Chicken">Grilled Chicken</option>
+                        <option value="Chicken Shawarma">Chicken Shawarma</option>
+                        <option value="Chiken Kebab">Chiken Kebab</option>
+                        <option value="Tandoori Chicken">Tandoori Chicken</option>
+                        <option value="Chicken Burger">Chicken Burger</option>
+                        <option value="Fish Fry with Rice">Fish Fry with Rice</option>
+                        <option value="Mutton Korma">Mutton Korma</option>
+                        <option value="Egg Bhurji">Egg Bhurji</option>
+                      </optgroup>
+                    </optgroup>
+                  </select>
+                </div>
 
-                  <!-- Ingredients Header -->
-                  <div class="row fw-bold mb-2">
-                    <div class="col-8">Ingredients</div>
-                    <div class="col-4">Weight</div>
-                  </div>
+                <div class="col-4">
+                  <input type="number" class="form-control" name="Quantity[]" placeholder="Units Consumed" min="1" required>
+                </div>
+                <div class="col-2">
+                  <select class="form-select" name="weightUnit[]">
+                    <option selected disabled>Unit</option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="piece">piece</option>
+                    <option value="cup">cup</option>
+                    <option value="plate">plate</option>
+                  </select>
+                </div>
+                <div class="col-2 text-end">
+                  <button type="button"
+                    class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-link fw-bold" id="addNonVeg">+ Add more</button>
+            <button type="submit" class="btn btn-sm px-4 py-2 shadow float-end"
+              style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">Calculate</button>
+          </form>
+        </div>
 
-                  <!-- Ingredients Form -->
-                  <form id="ingredientForm">
-                    <div id="ingredientFields">
+      </div> <!-- End rounded shadow -->
+    </div> <!-- End col-md-8 -->
+  </div> <!-- End row -->
+</div> <!-- End container -->
 
-                      <!-- Ingredient Row Template -->
-                      <div class="row mb-3 align-items-center ingredient-row">
-                        <div class="col-8">
-                          <select class="form-select" name="ingredient[]">
-                            <option selected disabled>Choose an ingredient</option>
-
-                            <optgroup label="Vegetarian Options">
-                              <optgroup label="Single items">
-                              <option value="roti">Roti</option>
-                              <option value="Rice">Rice</option>
-                              <option value="Dal">Dal</option>
-                              <option value="Paneer">Paneer</option>
-                              <option value="Milk">Milk</option>
-                              <option value="Vegetables">Vegetables</option>
-                              <option value="Oil">Oil</option>
-                              <option value="Curd">Curd</option>
-                              <option value="Butter">Butter</option>
-                              <option value="Cheese">Cheese</option>
-                              <option value="Chhole">Chhole</option>
-                              <option value="Aloo paratha">Aloo paratha</option>
-                              <option value="Kadhi">Kadhi</option>
-                              <option value="Veg Pulao">Veg Pulao</option>
-                              <option value="Maggi">Maggi</option>
-                            </optgroup>
-                            <optgroup label="Dishes">
-                              <option value="Chhole Bhature">Chhole Bhature</option>
-                              <option value="Idli Sambhar">Idli Sambhar</option>
-                              <option value="Paneer Tikka">Paneer Tikka</option>
-                              <option value="Veg Biryani">Veg Biryani</option>
-                              <option value="Rajma Chawal">Rajma Chawal</option>
-                              <option value="Aloo Paratha">Aloo Paratha</option>
-                              <option value="Samosa">Samosa</option>
-                              <option value="Masala Dosa">Masala Dosa</option>
-                              <option value="Pav Bhaji">Pav Bhaji</option>
-                              <option value="Kadhi Chawal">Kadhi Chawal</option>
-                              <option value="Vegetable Sandwich">Vegetable Sandwich</option>
-                              <option value="Poha">Poha</option>
-                              <option value="Upma">Upma</option>
-                              <option value="Veg Momos">Veg Momos </option>
-                              <option value="Dhokla">Dhokla</option>
-                            </optgroup>
-                            </optgroup>
-
-                            <optgroup label="Non-Vegetarian Options">
-                               <optgroup label="Single Items">
-                              <option value="Chicken">Chicken</option>
-                              <option value="Egg">Egg</option>
-                              <option value="Fish">Fish</option>
-                              <option value="Mutton">Mutton</option>
-                              <option value="Chicken Curry">Chicken Curry</option>
-                              <option value="Egg Curry">Egg Curry</option>
-                              <option value="Fish Curry">Fish Curry</option>
-                              <option value="Omlette">Omlette</option>
-                              <option value="Chicken Biryani">Chicken Biryani</option>
-                              <option value="Mutton Biryani">Mutton Biryani</option>
-                              <option value="Egg Biryani">Egg Biryani</option>
-                              <option value="Egg Roll">Egg Roll</option>
-                              <option value="Chicken Roll">Chicken Roll</option>
-                              <option value="Fish Fry">Fish Fry</option>
-                              <option value="Chicken Tikka">Chicken Tikka</option>
-                            </optgroup>
-                            <optgroup label="Dishes">
-                              <option value="Butter Chicken with Naan">Butter Chicken with Naan</option>
-                              <option value="Fish Curry">Fish Curry</option>
-                              <option value="Egg Curry">Egg Curry</option>
-                              <option value="Chicken Biryani ">Chicken Biryani</option>
-                              <option value="Mutton Rogan Josh">Mutton Rogan Josh</option>
-                              <option value="Prawn Masala">Prawn Masala</option>
-                              <option value="Fried Fish">Fried Fish</option>
-                              <option value="Grilled Chicken">Grilled Chicken</option>
-                              <option value="Chicken Shawarma">Chicken Shawarma</option>
-                              <option value="Chiken Kebab">Chiken Kebab</option>
-                              <option value="Tandoori Chicken">Tandoori Chicken</option>
-                              <option value="Chicken Burger">Chicken Burger</option>
-                              <option value="Fish Fry with Rice">Fish Fry with Rice</option>
-                              <option value="Mutton Korma">Mutton Korma</option>
-                              <option value="Egg Bhurji">Egg Bhurji</option>
-                            </optgroup>
-                            </optgroup>
-
-                          </select>
-
-                        </div>
-
-                        <div class="col-3">
-                          <select class="form-select" name="weightUnit[]">
-                            <option selected disabled>Unit</option>
-                            <option value="g">g</option>
-                            <option value="kg">kg</option>
-                            <option value="piece">piece</option>
-                            <option value="cup">cup</option>
-                            <option value="plate">plate</option>
-                          </select>
-                        </div>
-
-
-
-                        <div class="col-1 text-end">
-                          <button type="button"
-                            class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Add Ingredient Button -->
-                    <div class="mb-3">
-                      <button class="btn btn-link text-decoration-none fw-bold" type="button" id="addIngredient">
-                        + Add ingredient
-                      </button>
-                    </div>
-                    <div class="row mb-4">
-                      <div class="col text-end">
-                        <button class="btn btn-sm px-4 py-2 shadow"
-                          style=" background-color: #0b342e; color: white;border-radius: 30px;font-weight: 600;letter-spacing: 0.5px;transition: all 0.3s ease;border: none;">
-                          Calculate
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-
-                </div> <!-- End p-4 -->
-
-              </div> <!-- End rounded shadow -->
-            </div> <!-- End col-md-8 -->
-          </div> <!-- End row -->
-        </div> <!-- End container -->
-      </div>
-    </div>
     <!-- Article Section -->
 
     <div class="container my-5">
@@ -340,48 +365,70 @@
 
   </div>
 
+<script>
+   const mainSelect = document.getElementById("mainSelect");
 
-  <script>
-    const addBtn = document.getElementById('addIngredient');
-    const ingredientFields = document.getElementById('ingredientFields');
+const vegetarianSection = document.getElementById("vegetarianSection");
+const nonVegSection = document.getElementById("nonVegSection");
 
-    addBtn.addEventListener('click', () => {
-      const fieldHTML = `
-      <div class="row mb-3 align-items-center ingredient-row">
-        <div class="col-8">
-          <select class="form-select" name="ingredient[]">
-            <option selected disabled>Choose an ingredient</option>
-            <option value="rice">Rice</option>
-            <option value="egg">Egg</option>
-            <option value="beef">Beef</option>
-          </select>
-        </div>
-        <div class="col-3">
-          <input type="number" class="form-control" name="weight[]" placeholder="g">
-        </div>
-        <div class="col-1 text-end">
-          <button type="button" class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
-        </div>
-      </div>
-    `;
-      ingredientFields.insertAdjacentHTML('beforeend', fieldHTML);
-    });
+// Show relevant section based on selection
+mainSelect.addEventListener("change", function () {
+  const value = this.value;
 
-    // Delegate remove functionality to parent
-    ingredientFields.addEventListener('click', function (e) {
-      if (e.target.classList.contains('remove-btn')) {
-        e.target.closest('.ingredient-row').remove();
-      }
-    });
-    document.addEventListener("DOMContentLoaded", function() {
-  const inputs = document.querySelectorAll('input[type="number"]');
-  inputs.forEach(input => {
-    input.min = "0";
-    input.addEventListener('input', function() {
-      if (this.value < 0) this.value = 0;
-    });
-  });
+  vegetarianSection.classList.add("d-none");
+  nonVegSection.classList.add("d-none");
+
+  if (value === "clothing") vegetarianSection.classList.remove("d-none");
+  else if (value === "grocery") nonVegSection.classList.remove("d-none");
 });
+
+// Remove functionality
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('remove-btn')) {
+    const row = e.target.closest('.ingredient-row');
+    if (row) row.remove();
+  }
+});
+
+// Add more functionality for Vegetarian
+document.getElementById("addVegetarian").addEventListener("click", function () {
+  const fields = document.getElementById("vegetarianFields");
+  const firstRow = fields.querySelector(".ingredient-row");
+  const newRow = firstRow.cloneNode(true);
+
+  newRow.querySelectorAll("input").forEach(input => input.value = "");
+  newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+
+  fields.appendChild(newRow);
+
+  const removeBtn = newRow.querySelector('.remove-btn');
+  if (removeBtn) removeBtn.style.display = 'inline-block';
+});
+
+// Add more functionality for Non-Vegetarian
+document.getElementById("addNonVeg").addEventListener("click", function () {
+  const fields = document.getElementById("nonVegFields");
+  const firstRow = fields.querySelector(".ingredient-row");
+  const newRow = firstRow.cloneNode(true);
+
+  newRow.querySelectorAll("input").forEach(input => input.value = "");
+  newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+
+  fields.appendChild(newRow);
+
+  const removeBtn = newRow.querySelector('.remove-btn');
+  if (removeBtn) removeBtn.style.display = 'inline-block';
+});
+
+// Hide remove button on first static row
+document.addEventListener('DOMContentLoaded', function () {
+  const firstRemoveBtnVeg = document.querySelector('#vegetarianFields .ingredient-row .remove-btn');
+  if (firstRemoveBtnVeg) firstRemoveBtnVeg.style.display = 'none';
+
+  const firstRemoveBtnNonVeg = document.querySelector('#nonVegFields .ingredient-row .remove-btn');
+  if (firstRemoveBtnNonVeg) firstRemoveBtnNonVeg.style.display = 'none';
+});
+
 
   </script>
 

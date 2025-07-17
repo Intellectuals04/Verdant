@@ -114,9 +114,9 @@
             <div class="row fw-bold mb-3">
               <div class="col-4">Clothing Item</div>
               <div class="col-4">Fabric</div>
-              <div class="col-3">Quality</div>
+              <div class="col-3">Quantity</div>
             </div>
-            
+
 
 
             <form id="clothingForm">
@@ -124,18 +124,48 @@
                 <div class="row mb-3 align-items-center ingredient-row">
                   <div class="col-4">
                     <select class="form-select" name="clothing_item[]" required>
-                      <option value="" disabled selected>Choose Item</option>
-                      <option value="shirt">Shirt</option>
-                      <option value="jeans">Jeans</option>
+
+                      <option value="" disabled selected>Choose Clothing Item</option>
+                      <option value="T-shirt">T-shirt</option>
+                      <option value="Jeans">Jeans</option>
+                      <option value="Jacket">Jacket</option>
+                      <option value="Shirt">Shirt</option>
+                      <option value="Hoodie">Hoodie</option>
+                      <option value="Sweater">Sweater</option>
+                      <option value="Shorts">Shorts</option>
+                      <option value="Skirt">Skirt</option>
+                      <option value="Dress">Dress</option>
+                      <option value="Shoes">Shoes</option>
+                      <option value="Socks">Socks</option>
+                      <option value="Hat">Hat</option>
+                      <option value="Scarf">Scarf</option>
+                      <option value="Gloves">Gloves</option>
+                      <option value="Belt">Belt</option>
+                      <option value="denim">Denim</option>
                     </select>
+
                   </div>
 
                   <div class="col-4">
                     <select class="form-select" name="fabric[]" required>
-                      <option value="" disabled selected>Choose Fabric</option>
+
+                      <option value="" disabled selected>Choose Material</option>
+                      <option value="cotton">Cotton</option>
+                      <option value="polyester">Polyester</option>
                       <option value="wool">Wool</option>
+                      <option value="denim">Denim</option>
+                      <option value="leather">Leather</option>
+                      <option value="nylon">Nylon</option>
+                      <option value="acrylic">Acrylic</option>
                       <option value="silk">Silk</option>
+                      <option value="linen">Linen</option>
+                      <option value="rayon">Rayon</option>
+                      <option value="spandex">Spandex</option>
+                      <option value="hemp">Hemp</option>
+                      <option value="viscose">Viscose</option>
+                      <option value="cashmere">Cashmere</option>
                     </select>
+
                   </div>
 
                   <div class="col-3">
@@ -177,11 +207,88 @@
                 <div class="row mb-3 align-items-center ingredient-row">
                   <div class="col-6">
                     <select class="form-select" name="grocery_item[]" required>
-                      <option value="" disabled selected>Choose Item</option>
-                      <option value="rice">Rice</option>
-                      <option value="vegetables">Vegetables</option>
-                      <option value="fruits">Fruits</option>
+
+                      <option value="" disabled selected>Choose Food Item</option>
+
+                      <optgroup label="Foods (per kg)">
+                        <option value="beef">Beef</option>
+                        <option value="pork">Pork</option>
+                        <option value="chicken">Chicken</option>
+                        <option value="fish">Fish</option>
+                        <option value="eggs">Eggs</option>
+                        <option value="cheese">Cheese</option>
+                        <option value="yogurt">Yogurt</option>
+                        <option value="bread">Bread</option>
+                        <option value="lamb">Lamb</option>
+                        <option value="tofu">Tofu</option>
+                        <option value="panner">Paneer</option>
+                        <option value="rice">Rice</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="lentils">Lentils</option>
+                        <option value="beans">Beans</option>
+                        <option value="nuts">Nuts</option>
+                        <option value="chickpeas">Chickpeas</option>
+                        <option value="oats">Oats</option>
+                        <option value="potatoes">Potatoes</option>
+                        <option value="tomatoes">Tomatoes</option>
+                        <option value="carrots">Carrots</option>
+                        <option value="onions">Onions</option>
+                        <option value="broccoli">Broccoli</option>
+                        <option value="spinach">Spinach</option>
+                        <option value="cucumbers">Cucumbers</option>
+                        <option value="peppers">Peppers</option>
+                        <option value="apples">Apples</option>
+                        <option value="bananas">Bananas</option>
+                        <option value="oranges">Oranges</option>
+                        <option value="berries">Berries</option>
+                        <option value="grapes">Grapes</option>
+                        <option value="pears">Pears</option>
+                        <option value="kiwis">Kiwis</option>
+                        <option value="avocados">Avocados</option>
+                        <option value="lemons">Lemons</option>
+                        <option value="limes">Limes</option>
+                        <option value="peaches">Peaches</option>
+                        <option value="plums">Plums</option>
+                        <option value="cherries">Cherries</option>
+                        <option value="blackberries">Blackberries</option>
+                        <option value="strawberries">Strawberries</option>
+                        <option value="watermelon">Watermelon</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="grains">Grains</option>
+                        <option value="legumes">Legumes</option>
+                        <option value="nuts_seeds">Nuts & Seeds</option>
+                        <option value="herbs_spices">Herbs & Spices</option>
+                        <option value="sugar">Sugar</option>
+                        <option value="salt">Salt</option>
+                        <option value="honey">Honey</option>
+                        <option value="chocolate">Chocolate</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="sauces">Sauces</option>
+                        <option value="processed_foods">Processed Foods</option>
+                      </optgroup>
+
+                      <optgroup label="Beverages (per litre)">
+                        <option value="milk">Milk</option>
+                        <option value="juice">Juice</option>
+                        <option value="soda">Soda</option>
+                        <option value="water">Water</option>
+                        <option value="beer">Beer</option>
+                        <option value="wine">Wine</option>
+                        <option value="spirits">Spirits</option>
+                        <option value="soft_drinks">Soft Drinks</option>
+                        <option value="juices">Juices</option>
+                        <option value="alcohol">Alcohol</option>
+                        <option value="coffee">Coffee</option>
+                        <option value="tea">Tea</option>
+                        <option value="oils_fats">Oils & Fats</option>
+                        <option value="bottled_water">Bottled Water</option>
+                        <option value="plant_based_milk">Plant-Based Milk</option>
+                        <option value="nut_milk">Nut Milk</option>
+                      </optgroup>
+
                     </select>
+
                   </div>
 
                   <div class="col-5">
@@ -224,11 +331,36 @@
                 <div class="row mb-3 align-items-center ingredient-row">
                   <div class="col-6">
                     <select class="form-select" name="electric_item[]" required>
-                      <option value="" disabled selected>Choose Item</option>
-                      <option value="fan">Fan</option>
-                      <option value="bulb">Bulb</option>
-                      <option value="heater">Heater</option>
+
+                      <option value="" disabled selected>Choose Electronic Item</option>
+
+                      <optgroup label="General Electronics">
+                        <option value="smartphone">Smartphone</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="television">Television</option>
+                        <option value="smartwatch">Smartwatch</option>
+                        <option value="headphones">Headphones</option>
+                        <option value="camera">Camera</option>
+                        <option value="printer">Printer</option>
+                        <option value="gaming_console">Gaming Console</option>
+                        <option value="wi_fi_router">Wi-Fi Router</option>
+                        <option value="washing_machine">Washing Machine</option>
+                        <option value="refrigerator">Refrigerator</option>
+                        <option value="desktop_computer">Desktop Computer</option>
+                      </optgroup>
+
+                      <optgroup label="Air Conditioners">
+                        <option value="windows_ac_1_ton">Windows AC - 1.0 Ton</option>
+                        <option value="windows_ac_1_5_ton">Windows AC - 1.5 Ton</option>
+                        <option value="split_ac_1_ton">Split AC - 1.0 Ton</option>
+                        <option value="split_ac_1_5_ton">Split AC - 1.5 Ton</option>
+                        <option value="inverter_split_ac_1_5_ton">Inverter Split AC - 1.5 Ton</option>
+                        <option value="inverter_split_ac_2_plus_ton">Inverter Split AC - 2.0+ Ton</option>
+                      </optgroup>
+
                     </select>
+
                   </div>
 
                   <div class="col-5">
@@ -274,7 +406,8 @@
 
       <p>Here are four practical ways to cut down the carbon footprint of your shopping habits.</p>
 
-      <img src="/verdant/frontend/images/shopping3.jpg" style="height: 400px; width: 70%; display: block; margin: auto;">
+      <img src="/verdant/frontend/images/shopping3.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
 
       <h5 class="fw-bold mt-4" style="color: #0b342e;">1. Buy only what you need</h5>
       <p>Impulse purchases often lead to waste. Before buying, ask yourself if you truly need the item. Planning your
@@ -284,7 +417,8 @@
       <p>Buying locally produced goods reduces transportation emissions and supports your community’s economy.
         Additionally, opt for products made from recycled or sustainable materials to further lower your footprint.
       </p>
-      <img src="/verdant/frontend/images/shopping7.jpg" style="height: 400px; width: 70%; display: block; margin: auto;">
+      <img src="/verdant/frontend/images/shopping7.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
 
       <h5 class="fw-bold mt-4 m" style="color: #0b342e;">3. Avoid excessive packaging</h5>
       <p>Packaging contributes significantly to carbon emissions, especially single-use plastics. Choose products with
@@ -294,20 +428,23 @@
 
       <p>Buying loose vegetables instead of pre-packaged ones saves plastic waste and reduces emissions from packaging
         production and disposal.</p>
-      <img src="/verdant/frontend/images/shopping11.jpg" style="height: 400px; width: 70%; display: block; margin: auto;">
+      <img src="/verdant/frontend/images/shopping11.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
 
       <h5 class="fw-bold mt-4" style="color: #0b342e;">4. Choose quality over quantity</h5>
       <p>High-quality products last longer, reducing the frequency of replacement purchases. This not only saves money
         in the long run but also lowers emissions associated with manufacturing and delivery.</p>
 
-      <img src="/verdant/frontend/images/shopping2.jpg" style="height: 400px; width: 70%; display: block; margin: auto;">
+      <img src="/verdant/frontend/images/shopping2.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
 
       <h5 class="fw-bold mt-4" style="color: #0b342e;">Conclusion</h5>
       <p>Reducing your shopping carbon footprint is possible through thoughtful choices. Buy only what you need,
         prefer local and sustainable products, avoid excessive packaging, and invest in quality items to contribute to
         a greener planet.</p>
 
-      <img src="/verdant/frontend/images/shopping6.png" style="height: 400px; width: 70%; display: block; margin: auto;">
+      <img src="/verdant/frontend/images/shopping6.png"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
 
     </div>
   </div>
@@ -349,7 +486,7 @@
       else if (value === "electric") electricSection.classList.remove("d-none");
     });
 
-      // Remove functionality with reset to main select
+    // Remove functionality with reset to main select
     document.addEventListener('click', function (e) {
       if (e.target.classList.contains('remove-btn')) {
         // Remove the input row
@@ -366,56 +503,56 @@
       }
     });
     // Add more functionality for Clothing
-document.getElementById("addClothing").addEventListener("click", function () {
-  const fields = document.getElementById("clothingFields");
-  const firstRow = fields.querySelector(".ingredient-row");
-  const newRow = firstRow.cloneNode(true);
-  fields.appendChild(newRow);
+    document.getElementById("addClothing").addEventListener("click", function () {
+      const fields = document.getElementById("clothingFields");
+      const firstRow = fields.querySelector(".ingredient-row");
+      const newRow = firstRow.cloneNode(true);
+      fields.appendChild(newRow);
 
-  // Show remove button for cloned rows only
-  const removeBtn = newRow.querySelector('.remove-btn');
-  if (removeBtn) removeBtn.style.display = 'inline-block';
-});
+      // Show remove button for cloned rows only
+      const removeBtn = newRow.querySelector('.remove-btn');
+      if (removeBtn) removeBtn.style.display = 'inline-block';
+    });
 
-// Hide remove button on first static row
-document.addEventListener('DOMContentLoaded', function () {
-  const firstRemoveBtn = document.querySelector('#clothingFields .ingredient-row .remove-btn');
-  if (firstRemoveBtn) firstRemoveBtn.style.display = 'none';
-});
-// Add more functionality for Grocery
-document.getElementById("addGrocery").addEventListener("click", function () {
-  const fields = document.getElementById("groceryFields");
-  const firstRow = fields.querySelector(".ingredient-row");
-  const newRow = firstRow.cloneNode(true);
-  fields.appendChild(newRow);
+    // Hide remove button on first static row
+    document.addEventListener('DOMContentLoaded', function () {
+      const firstRemoveBtn = document.querySelector('#clothingFields .ingredient-row .remove-btn');
+      if (firstRemoveBtn) firstRemoveBtn.style.display = 'none';
+    });
+    // Add more functionality for Grocery
+    document.getElementById("addGrocery").addEventListener("click", function () {
+      const fields = document.getElementById("groceryFields");
+      const firstRow = fields.querySelector(".ingredient-row");
+      const newRow = firstRow.cloneNode(true);
+      fields.appendChild(newRow);
 
-  // Show remove button for cloned rows only
-  const removeBtn = newRow.querySelector('.remove-btn');
-  if (removeBtn) removeBtn.style.display = 'inline-block';
-});
+      // Show remove button for cloned rows only
+      const removeBtn = newRow.querySelector('.remove-btn');
+      if (removeBtn) removeBtn.style.display = 'inline-block';
+    });
 
-// Hide remove button on first static row
-document.addEventListener('DOMContentLoaded', function () {
-  const firstRemoveBtnGrocery = document.querySelector('#groceryFields .ingredient-row .remove-btn');
-  if (firstRemoveBtnGrocery) firstRemoveBtnGrocery.style.display = 'none';
-});
-// Add more functionality for Electric
-document.getElementById("addElectric").addEventListener("click", function () {
-  const fields = document.getElementById("electricFields");
-  const firstRow = fields.querySelector(".ingredient-row");
-  const newRow = firstRow.cloneNode(true);
-  fields.appendChild(newRow);
+    // Hide remove button on first static row
+    document.addEventListener('DOMContentLoaded', function () {
+      const firstRemoveBtnGrocery = document.querySelector('#groceryFields .ingredient-row .remove-btn');
+      if (firstRemoveBtnGrocery) firstRemoveBtnGrocery.style.display = 'none';
+    });
+    // Add more functionality for Electric
+    document.getElementById("addElectric").addEventListener("click", function () {
+      const fields = document.getElementById("electricFields");
+      const firstRow = fields.querySelector(".ingredient-row");
+      const newRow = firstRow.cloneNode(true);
+      fields.appendChild(newRow);
 
-  // Show remove button for cloned rows only
-  const removeBtn = newRow.querySelector('.remove-btn');
-  if (removeBtn) removeBtn.style.display = 'inline-block';
-});
+      // Show remove button for cloned rows only
+      const removeBtn = newRow.querySelector('.remove-btn');
+      if (removeBtn) removeBtn.style.display = 'inline-block';
+    });
 
-// Hide remove button on first static row
-document.addEventListener('DOMContentLoaded', function () {
-  const firstRemoveBtnElectric = document.querySelector('#electricFields .ingredient-row .remove-btn');
-  if (firstRemoveBtnElectric) firstRemoveBtnElectric.style.display = 'none';
-});
+    // Hide remove button on first static row
+    document.addEventListener('DOMContentLoaded', function () {
+      const firstRemoveBtnElectric = document.querySelector('#electricFields .ingredient-row .remove-btn');
+      if (firstRemoveBtnElectric) firstRemoveBtnElectric.style.display = 'none';
+    });
 
 
 
