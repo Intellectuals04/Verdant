@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food Carbon Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f8f7
+    }
+
+    .hero {
+      background: url('../../../frontend/images/zim2.png') center/cover no-repeat;
+      height: 700px;
+      position: relative;
+
+    }
+
+    .hero-overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    .card-shadow {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .ingredient-row+.ingredient-row {
+      margin-top: 15px;
+    }
+
+    ::placeholder {
+      color: white !important;
+      opacity: 1;
+    }
+
+    .btn-custom {
+      background-color: rgb(11, 52, 46);
+      color: white;
+    }
+
+    .btn-custom:hover {
+      background-color: rgb(20, 70, 60);
+      color: white;
+    }
+
+    .form-control-custom {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    .form-control-custom:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    }
+
+    .form-select-custom {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    .form-select-custom option {
+      background-color: #0b342e;
+      color: white;
+    }
+
+    .form-select-custom:focus {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100" style="z-index: 10;">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Verdant</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/websitetracker/index.html">Website Tracker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/personaltracker/index.html">Personal Tracker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero d-flex align-items-center text-center text-white">
+    <div class="hero-overlay"></div>
+    <div class="container hero-text">
+      <h1 class="display-4 fw-bold mb-3">Food Carbon Calculator</h1>
+      <p class="lead mb-4">Estimate your carbon footprint from daily food consumption.</p>
+    </div>
+  </div>
+
+  <div class="container my-5">
+    <div class="card card-shadow p-4 mb-4">
+      <h3 class="mb-4 text-center">Your Food Choices</h3>
+      <form id="foodCarbonForm">
+        <div class="mb-4">
+          <h5 class="mb-3 text-success">Vegetarian / Vegan Choices</h5>
+          <div id="vegetarianFields">
+            <div class="row ingredient-row g-3 align-items-end mb-3">
+              <div class="col-md-5">
+                <label for="vegFoodItem" class="form-label">Food Item</label>
+                <select class="form-select" id="vegFoodItem">
+                  <option value="">Select Item</option>
+                  <option value="vegetables">Vegetables (fresh)</option>
+                  <option value="fruits">Fruits (fresh)</option>
+                  <option value="grains_rice">Grains (e.g., Rice, Wheat)</option>
+                  <option value="legumes_beans">Legumes & Beans</option>
+                  <option value="nuts_seeds">Nuts & Seeds</option>
+                  <option value="dairy_milk">Dairy Milk</option>
+                  <option value="dairy_cheese">Dairy Cheese</option>
+                  <option value="eggs">Eggs</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label for="vegQuantity" class="form-label">Quantity (kg or Litres for Milk)</label>
+                <input type="number" class="form-control" id="vegQuantity" placeholder="e.g., 1" min="0" step="0.01">
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-success btn-sm" id="addVegetarian">Add More Vegetarian/Vegan</button>
+        </div>
+
+        <div class="mb-4">
+          <h5 class="mb-3 text-danger">Non-Vegetarian Choices</h5>
+          <div id="nonVegFields">
+            <div class="row ingredient-row g-3 align-items-end mb-3">
+              <div class="col-md-5">
+                <label for="nonVegFoodItem" class="form-label">Food Item</label>
+                <select class="form-select" id="nonVegFoodItem">
+                  <option value="">Select Item</option>
+                  <option value="beef">Beef</option>
+                  <option value="lamb_mutton">Lamb/Mutton</option>
+                  <option value="pork">Pork</option>
+                  <option value="chicken">Chicken</option>
+                  <option value="fish_farmed">Fish (farmed)</option>
+                  <option value="fish_wild">Fish (wild-caught)</option>
+                </select>
+              </div>
+              <div class="col-md-5">
+                <label for="nonVegQuantity" class="form-label">Quantity (kg)</label>
+                <input type="number" class="form-control" id="nonVegQuantity" placeholder="e.g., 0.5" min="0" step="0.01">
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-danger btn-sm" id="addNonVeg">Add More Non-Vegetarian</button>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success btn-lg mt-4">Calculate Carbon Footprint</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card card-shadow p-4 mt-4" id="resultCard" style="display: none;">
+      <h3 class="text-center text-success mb-3">Your Estimated Food Carbon Footprint</h3>
+      <p class="lead text-center mb-0">
+        <span id="carbonFootprintResult" class="fw-bold fs-4"></span> kg CO2e
+      </p>
+      <p class="text-muted text-center mt-2">
+        This is an estimate based on your provided data. Food carbon footprints can vary greatly based on origin,
+        transport, and production methods.
+      </p>
+    </div>
+  </div>
+
+  <a href="../../faq.html" class="btn btn-dark position-fixed bottom-0 end-0 m-3 rounded-pill">FAQs</a>
+
+  <footer class="text-white py-4 mt-5" style="background-color: #0b342e;">
+    <div class="container text-center">
+      <p class="mb-1">© 2025 Verdant. All rights reserved.</p>
+      <p class="mb-0">
+        <a href="../../about.html" class="text-white text-decoration-none me-3">About</a>
+        <a href="../../contact.html" class="text-white text-decoration-none">Contact</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Carbon emission factors (kg CO2e per kg or litre of food)
+    const carbonFactors = {
+      food: {
+        // Vegetarian / Vegan
+        vegetables: 0.2, // kg CO2e per kg
+        fruits: 0.4,    // kg CO2e per kg
+        grains_rice: 2.7, // kg CO2e per kg (rice can be high due to methane)
+        legumes_beans: 0.8, // kg CO2e per kg
+        nuts_seeds: 0.5, // kg CO2e per kg
+        dairy_milk: 1.0, // kg CO2e per litre
+        dairy_cheese: 21.0, // kg CO2e per kg (very high)
+        eggs: 4.5,     // kg CO2e per kg
+
+        // Non-Vegetarian
+        beef: 27.0,      // kg CO2e per kg (highest)
+        lamb_mutton: 39.0, // kg CO2e per kg (also very high)
+        pork: 12.1,      // kg CO2e per kg
+        chicken: 6.9,    // kg CO2e per kg
+        fish_farmed: 5.0, // kg CO2e per kg
+        fish_wild: 3.0   // kg CO2e per kg
+      }
+    };
+
+    document.getElementById('foodCarbonForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let totalCarbonFootprint = 0;
+
+      // Calculate Vegetarian/Vegan
+      document.querySelectorAll('#vegetarianFields .ingredient-row').forEach(row => {
+        const item = row.querySelector('select').value;
+        const quantity = parseFloat(row.querySelector('input[type="number"]').value);
+        if (item && quantity > 0 && carbonFactors.food[item]) {
+          totalCarbonFootprint += quantity * carbonFactors.food[item];
+        }
+      });
+
+      // Calculate Non-Vegetarian
+      document.querySelectorAll('#nonVegFields .ingredient-row').forEach(row => {
+        const item = row.querySelector('select').value;
+        const quantity = parseFloat(row.querySelector('input[type="number"]').value);
+        if (item && quantity > 0 && carbonFactors.food[item]) {
+          totalCarbonFootprint += quantity * carbonFactors.food[item];
+        }
+      });
+
+      document.getElementById('carbonFootprintResult').textContent = totalCarbonFootprint.toFixed(2);
+      document.getElementById('resultCard').style.display = 'block';
+      document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Add more functionality for Vegetarian/Vegan
+    document.getElementById("addVegetarian").addEventListener("click", function () {
+      const fields = document.getElementById("vegetarianFields");
+      const firstRow = fields.querySelector(".ingredient-row");
+      const newRow = firstRow.cloneNode(true);
+
+      newRow.querySelectorAll("input").forEach(input => input.value = "");
+      newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+
+      fields.appendChild(newRow);
+
+      const removeBtn = newRow.querySelector('.remove-btn');
+      if (removeBtn) removeBtn.style.display = 'inline-block';
+    });
+
+    // Add more functionality for Non-Vegetarian
+    document.getElementById("addNonVeg").addEventListener("click", function () {
+      const fields = document.getElementById("nonVegFields");
+      const firstRow = fields.querySelector(".ingredient-row");
+      const newRow = firstRow.cloneNode(true);
+
+      newRow.querySelectorAll("input").forEach(input => input.value = "");
+      newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+
+      fields.appendChild(newRow);
+
+      const removeBtn = newRow.querySelector('.remove-btn');
+      if (removeBtn) removeBtn.style.display = 'inline-block';
+    });
+
+    // Remove functionality
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('remove-btn')) {
+        const row = e.target.closest('.ingredient-row');
+        // Ensure at least one row remains
+        if (row && row.parentNode.querySelectorAll('.ingredient-row').length > 1) {
+          row.remove();
+        }
+      }
+    });
+
+    // Hide remove button on first static row
+    document.addEventListener('DOMContentLoaded', function () {
+      const firstRemoveBtnVeg = document.querySelector('#vegetarianFields .ingredient-row .remove-btn');
+      if (firstRemoveBtnVeg) firstRemoveBtnVeg.style.display = 'none';
+
+      const firstRemoveBtnNonVeg = document.querySelector('#nonVegFields .ingredient-row .remove-btn');
+      if (firstRemoveBtnNonVeg) firstRemoveBtnNonVeg.style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>
