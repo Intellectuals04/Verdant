@@ -2,22 +2,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
-
-
-
-
 
 body {
   height: 100vh;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('/verdant_frontend/image.png'); /* example image */
+  background-image: url("/verdant_frontend/image"); /* example image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -153,6 +148,5 @@ a:hover {
 }
 
 .sign-up-btn:hover {
-  background-color:#1e8473, #0b342e;
+  background-color: #1e8473, #0b342e;
 }
-

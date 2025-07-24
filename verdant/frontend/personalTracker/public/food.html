@@ -37,293 +37,404 @@
     }
 
     .card-shadow {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .ingredient-row+.ingredient-row {
-      margin-top: 15px;
+    .btn-custom {
+      background-color: rgb(11, 52, 46);
+      color: white;
+      border-radius: 0px;
+    }
+
+    .btn-custom:hover {
+      background-color: rgb(8, 40, 35);
+      color: white;
+    }
+
+    #footer {
+      height: 100%;
     }
 
     ::placeholder {
       color: white !important;
       opacity: 1;
     }
-
-    .btn-custom {
-      background-color: rgb(11, 52, 46);
-      color: white;
-    }
-
-    .btn-custom:hover {
-      background-color: rgb(20, 70, 60);
-      color: white;
-    }
-
-    .form-control-custom {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-    }
-
-    .form-control-custom:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
-    }
-
-    .form-select-custom {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-    }
-
-    .form-select-custom option {
-      background-color: #0b342e;
-      color: white;
-    }
-
-    .form-select-custom:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    .custom-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: #0b342e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 10px center;
+      background-size: 14px;
+      padding-right: 25px;
     }
   </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100" style="z-index: 10;">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Verdant</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="d-flex flex-column min-vh-100">
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/websitetracker/index.html">Website Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/personaltracker/index.html">Personal Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about.html">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact.html">Contact</a>
-          </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg" style="background-color: #0b342e; width: 100%;">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="#">Verdant</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link text-white" href="../../../frontend/index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../websitetracker/public/index.html">Audit</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../../frontend/login.html">Sign-In</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../../frontend/contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../../frontend/about.html">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-text text-center">
+        <h1 class="fw-bold">Calculate Food Carbon Emission</h1>
+        <p class="fs-5">Know your meal's environmental impact and make greener choices.</p>
       </div>
     </div>
-  </nav>
 
-  <div class="hero d-flex align-items-center text-center text-white">
-    <div class="hero-overlay"></div>
-    <div class="container hero-text">
-      <h1 class="display-4 fw-bold mb-3">Food Carbon Calculator</h1>
-      <p class="lead mb-4">Estimate your carbon footprint from daily food consumption.</p>
-    </div>
-  </div>
 
-  <div class="container my-5">
-    <div class="card card-shadow p-4 mb-4">
-      <h3 class="mb-4 text-center">Your Food Choices</h3>
-      <form id="foodCarbonForm">
-        <div class="mb-4">
-          <h5 class="mb-3 text-success">Vegetarian / Vegan Choices</h5>
-          <div id="vegetarianFields">
-            <div class="row ingredient-row g-3 align-items-end mb-3">
-              <div class="col-md-5">
-                <label for="vegFoodItem" class="form-label">Food Item</label>
-                <select class="form-select" id="vegFoodItem">
-                  <option value="">Select Item</option>
-                  <option value="vegetables">Vegetables (fresh)</option>
-                  <option value="fruits">Fruits (fresh)</option>
-                  <option value="grains_rice">Grains (e.g., Rice, Wheat)</option>
-                  <option value="legumes_beans">Legumes & Beans</option>
-                  <option value="nuts_seeds">Nuts & Seeds</option>
-                  <option value="dairy_milk">Dairy Milk</option>
-                  <option value="dairy_cheese">Dairy Cheese</option>
-                  <option value="eggs">Eggs</option>
-                </select>
-              </div>
-              <div class="col-md-5">
-                <label for="vegQuantity" class="form-label">Quantity (kg or Litres for Milk)</label>
-                <input type="number" class="form-control" id="vegQuantity" placeholder="e.g., 1" min="0" step="0.01">
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
+    <div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="rounded shadow" style="background: white; border-radius: 15px; overflow: hidden;">
+
+        <!-- Header -->
+        <div style="background-color: #0b342e; color: white; padding: 15px 20px;">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Select Your Food Type:</h5>
+            <select id="mainSelect" class="form-control text-center text-white custom-select ingredient-heading"
+              style="width: 140px; border-radius: 20px; background-color: #0b342e; border: 1px solid white;">
+              <option value="" disabled selected>Food</option>
+              <option value="clothing">Vegetarian</option>
+              <option value="grocery">Non-Vegetarian</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Vegetarian section -->
+        <div id="vegetarianSection" class="p-4 d-none">
+          <div class="row fw-bold mb-3">
+            <div class="col-4">Select the food item</div>
+            <div class="col-4">Quantity/Servings</div>
+            <div class="col-2">Weight</div>
+          </div>
+          <form>
+            <div id="vegetarianFields">
+              <div class="row mb-3 align-items-center ingredient-row">
+                <div class="col-4">
+                  <select class="form-select" name="ingredient[]">
+                    <option selected disabled>Choose an ingredient</option>
+                    <optgroup label="Vegetarian Options">
+                      <optgroup label="Single items">
+                        <option value="roti">Roti</option>
+                        <option value="Rice">Rice</option>
+                        <option value="Dal">Dal</option>
+                        <option value="Paneer">Paneer</option>
+                        <option value="Milk">Milk</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Oil">Oil</option>
+                        <option value="Curd">Curd</option>
+                        <option value="Butter">Butter</option>
+                        <option value="Cheese">Cheese</option>
+                        <option value="Chhole">Chhole</option>
+                        <option value="Aloo paratha">Aloo paratha</option>
+                        <option value="Kadhi">Kadhi</option>
+                        <option value="Veg Pulao">Veg Pulao</option>
+                        <option value="Maggi">Maggi</option>
+                      </optgroup>
+                      <optgroup label="Dishes">
+                        <option value="Chhole Bhature">Chhole Bhature</option>
+                        <option value="Idli Sambhar">Idli Sambhar</option>
+                        <option value="Paneer Tikka">Paneer Tikka</option>
+                        <option value="Veg Biryani">Veg Biryani</option>
+                        <option value="Rajma Chawal">Rajma Chawal</option>
+                        <option value="Aloo Paratha">Aloo Paratha</option>
+                        <option value="Samosa">Samosa</option>
+                        <option value="Masala Dosa">Masala Dosa</option>
+                        <option value="Pav Bhaji">Pav Bhaji</option>
+                        <option value="Kadhi Chawal">Kadhi Chawal</option>
+                        <option value="Vegetable Sandwich">Vegetable Sandwich</option>
+                        <option value="Poha">Poha</option>
+                        <option value="Upma">Upma</option>
+                        <option value="Veg Momos">Veg Momos </option>
+                        <option value="Dhokla">Dhokla</option>
+                      </optgroup>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div class="col-4">
+                  <input type="number" class="form-control" name="Quantity[]" placeholder="Units Consumed" min="1" required>
+                </div>
+                <div class="col-2">
+                  <select class="form-select" name="weightUnit[]">
+                    <option selected disabled>Unit</option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="piece">piece</option>
+                    <option value="cup">cup</option>
+                    <option value="plate">plate</option>
+                  </select>
+                </div>
+                <div class="col-2 text-end">
+                  <button type="button"
+                    class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                </div>
               </div>
             </div>
-          </div>
-          <button type="button" class="btn btn-outline-success btn-sm" id="addVegetarian">Add More Vegetarian/Vegan</button>
+            <button type="button" class="btn btn-link fw-bold" id="addVegetarian">+ Add more</button>
+            <button type="submit" class="btn btn-sm px-4 py-2 shadow float-end"
+              style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">Calculate</button>
+          </form>
         </div>
 
-        <div class="mb-4">
-          <h5 class="mb-3 text-danger">Non-Vegetarian Choices</h5>
-          <div id="nonVegFields">
-            <div class="row ingredient-row g-3 align-items-end mb-3">
-              <div class="col-md-5">
-                <label for="nonVegFoodItem" class="form-label">Food Item</label>
-                <select class="form-select" id="nonVegFoodItem">
-                  <option value="">Select Item</option>
-                  <option value="beef">Beef</option>
-                  <option value="lamb_mutton">Lamb/Mutton</option>
-                  <option value="pork">Pork</option>
-                  <option value="chicken">Chicken</option>
-                  <option value="fish_farmed">Fish (farmed)</option>
-                  <option value="fish_wild">Fish (wild-caught)</option>
-                </select>
-              </div>
-              <div class="col-md-5">
-                <label for="nonVegQuantity" class="form-label">Quantity (kg)</label>
-                <input type="number" class="form-control" id="nonVegQuantity" placeholder="e.g., 0.5" min="0" step="0.01">
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
+        <!-- Non-Vegetarian section -->
+        <div id="nonVegSection" class="p-4 d-none">
+          <div class="row fw-bold mb-3">
+            <div class="col-4">Select the food item</div>
+            <div class="col-4">Quantity/Servings</div>
+            <div class="col-2">Weight</div>
+          </div>
+          <form>
+            <div id="nonVegFields">
+              <div class="row mb-3 align-items-center ingredient-row">
+                <div class="col-4">
+                  <select class="form-select" name="ingredient[]">
+                    <option selected disabled>Choose an ingredient</option>
+                    <optgroup label="Non-Vegetarian Options">
+                      <optgroup label="Single Items">
+                        <option value="Chicken">Chicken</option>
+                        <option value="Egg">Egg</option>
+                        <option value="Fish">Fish</option>
+                        <option value="Mutton">Mutton</option>
+                        <option value="Chicken Curry">Chicken Curry</option>
+                        <option value="Egg Curry">Egg Curry</option>
+                        <option value="Fish Curry">Fish Curry</option>
+                        <option value="Omlette">Omlette</option>
+                        <option value="Chicken Biryani">Chicken Biryani</option>
+                        <option value="Mutton Biryani">Mutton Biryani</option>
+                        <option value="Egg Biryani">Egg Biryani</option>
+                        <option value="Egg Roll">Egg Roll</option>
+                        <option value="Chicken Roll">Chicken Roll</option>
+                        <option value="Fish Fry">Fish Fry</option>
+                        <option value="Chicken Tikka">Chicken Tikka</option>
+                      </optgroup>
+                      <optgroup label="Dishes">
+                        <option value="Butter Chicken with Naan">Butter Chicken with Naan</option>
+                        <option value="Fish Curry">Fish Curry</option>
+                        <option value="Egg Curry">Egg Curry</option>
+                        <option value="Chicken Biryani ">Chicken Biryani</option>
+                        <option value="Mutton Rogan Josh">Mutton Rogan Josh</option>
+                        <option value="Prawn Masala">Prawn Masala</option>
+                        <option value="Fried Fish">Fried Fish</option>
+                        <option value="Grilled Chicken">Grilled Chicken</option>
+                        <option value="Chicken Shawarma">Chicken Shawarma</option>
+                        <option value="Chiken Kebab">Chiken Kebab</option>
+                        <option value="Tandoori Chicken">Tandoori Chicken</option>
+                        <option value="Chicken Burger">Chicken Burger</option>
+                        <option value="Fish Fry with Rice">Fish Fry with Rice</option>
+                        <option value="Mutton Korma">Mutton Korma</option>
+                        <option value="Egg Bhurji">Egg Bhurji</option>
+                      </optgroup>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <div class="col-4">
+                  <input type="number" class="form-control" name="Quantity[]" placeholder="Units Consumed" min="1" required>
+                </div>
+                <div class="col-2">
+                  <select class="form-select" name="weightUnit[]">
+                    <option selected disabled>Unit</option>
+                    <option value="g">g</option>
+                    <option value="kg">kg</option>
+                    <option value="piece">piece</option>
+                    <option value="cup">cup</option>
+                    <option value="plate">plate</option>
+                  </select>
+                </div>
+                <div class="col-2 text-end">
+                  <button type="button"
+                    class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                </div>
               </div>
             </div>
-          </div>
-          <button type="button" class="btn btn-outline-danger btn-sm" id="addNonVeg">Add More Non-Vegetarian</button>
+            <button type="button" class="btn btn-link fw-bold" id="addNonVeg">+ Add more</button>
+            <button type="submit" class="btn btn-sm px-4 py-2 shadow float-end"
+              style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">Calculate</button>
+          </form>
         </div>
 
-        <div class="text-center">
-          <button type="submit" class="btn btn-success btn-lg mt-4">Calculate Carbon Footprint</button>
-        </div>
-      </form>
+      </div> <!-- End rounded shadow -->
+    </div> <!-- End col-md-8 -->
+  </div> <!-- End row -->
+</div> <!-- End container -->
+
+    <!-- Article Section -->
+
+    <div class="container my-5">
+      <div class="p-4" style="background-color: #f8f9fa; border-radius: 15px;">
+
+        <h3 class="fw-bold mb-4 mt-4" style="color: #0b342e;">How to Lower Your Food's Carbon Footprint</h3>
+
+        <p>Food production accounts for around a third of global greenhouse gas emissions. Reducing your food-related
+          carbon footprint is therefore one of the most effective ways to fight climate change.</p>
+
+        <p>It can be confusing to know where to start, so here are four practical ways to cut down the carbon footprint
+          of your diet.</p>
+        <img src="../../../frontend/images/food1.png" style="height: 400px; width: 70%; position: relative; display: block; margin: auto;">
+
+
+        <h5 class="fw-bold mt-4" style="color: #0b342e;">1. Eat fewer animal products</h5>
+        <p>Animal-based foods, especially meat, have much higher carbon emissions compared to plant-based foods. This is
+          mainly due to emissions from farming and land use rather than transportation or packaging.</p>
+
+        <h6 class="fw-bold">Beef</h6>
+        <p>Beef has the highest carbon footprint of all foods. Producing 1kg of beef generates about four times the
+          emissions of other foods, mainly due to methane released by cows. For example, eating just 125g of beef emits
+          as much CO2 as driving a car for over 43km!</p>
+        <p>Switching beef with chicken reduces emissions sevenfold, pork reduces them fivefold, and lamb cuts them by
+          half, though lamb still remains emission-heavy.</p>
+
+        <h6 class="fw-bold">Meat and dairy products</h6>
+        <p>All meats and dairy have higher-than-average emissions. Butter, for instance, emits more than chicken or
+          pork. Replacing butter with margarine can cut emissions by a third. While milk has lower emissions than beef,
+          it still produces twice the emissions of soy milk.</p>
+        <p>Plant-based alternatives like tofu, legumes, and grains have much lower footprints, making them sustainable
+          substitutes for meat and dairy.</p>
+
+        <h5 class="fw-bold mt-4" style="color: #0b342e;">2. Choose seasonal foods</h5>
+        <p>Eating foods in their natural season helps cut emissions since growing out-of-season foods requires
+          energy-intensive artificial conditions. Studies show that eating seasonal produce, even if imported, can cut
+          emissions by over 85% compared to local but out-of-season foods.</p>
+        <p>Eating seasonally also reconnects us with nature and supports sustainability.</p>
+
+        <h5 class="fw-bold mt-4" style="color: #0b342e;">3. Cut down on food waste</h5>
+        <p>Around 25% of all food is wasted, which makes up about 6% of global emissions – more than the entire aviation
+          industry. Most food waste happens at home. Planning meals, buying only what you need, and using food before it
+          spoils are simple ways to reduce waste.</p>
+
+        <h5 class="fw-bold mt-4" style="color: #0b342e;">4. Avoid air-freighted foods</h5>
+        <p>Although less than 1% of food is transported by air, these foods contribute about 12% of total food transport
+          emissions due to the high impact of air travel.</p>
+        <h6 class="fw-bold">How to spot air-freighted foods</h6>
+        <p>Labels rarely state if food was flown, but as a rule, avoid products with short shelf-lives that come from
+          far away, especially if freshness is emphasised. These are usually flown in to maintain quality quickly.</p>
+        <img src="../../../frontend/images/food5.png" style="height: 400px; width: 70%; position: relative; display: block; margin: auto;">
+
+
+        <h5 class="fw-bold mt-4" style="color: #0b342e;">Conclusion</h5>
+        <p>Adopting a sustainable diet requires conscious decisions, but small changes like eating less meat, choosing
+          seasonal produce, reducing food waste, and avoiding air-freighted foods can significantly lower your carbon
+          footprint.</p>
+
+        <img src="../../../frontend/images/food3.png" style="height: 400px; width: 70%; position: relative; display: block; margin: auto;">
+
+
+      </div>
     </div>
 
-    <div class="card card-shadow p-4 mt-4" id="resultCard" style="display: none;">
-      <h3 class="text-center text-success mb-3">Your Estimated Food Carbon Footprint</h3>
-      <p class="lead text-center mb-0">
-        <span id="carbonFootprintResult" class="fw-bold fs-4"></span> kg CO2e
-      </p>
-      <p class="text-muted text-center mt-2">
-        This is an estimate based on your provided data. Food carbon footprints can vary greatly based on origin,
-        transport, and production methods.
-      </p>
-    </div>
+
+
+    <a href="../../faq.html" class="btn btn-dark position-fixed bottom-0 start-0 m-3 rounded-pill">FAQs</a>
+
+
+
+    <footer class="mt-auto text-white py-4" style="background-color: #0b342e; " id="footer">
+      <div class="container text-center">
+        <p class="mb-1">© 2025 Verdant. All rights reserved.</p>
+        <p class="mb-0">
+          <a href="../../../frontend/about.html" class="text-white text-decoration-none me-3">About</a>
+          <a href="../../../frontend/contact.html" class="text-white text-decoration-none me-3">Contact</a>
+          <a href="../../../frontend/faq.html" class="text-white text-decoration-none">FAQs</a>
+        </p>
+      </div>
+    </footer>
+
+
   </div>
 
-  <a href="../../faq.html" class="btn btn-dark position-fixed bottom-0 end-0 m-3 rounded-pill">FAQs</a>
+<script>
+   const mainSelect = document.getElementById("mainSelect");
 
-  <footer class="text-white py-4 mt-5" style="background-color: #0b342e;">
-    <div class="container text-center">
-      <p class="mb-1">© 2025 Verdant. All rights reserved.</p>
-      <p class="mb-0">
-        <a href="../../about.html" class="text-white text-decoration-none me-3">About</a>
-        <a href="../../contact.html" class="text-white text-decoration-none">Contact</a>
-      </p>
-    </div>
-  </footer>
+const vegetarianSection = document.getElementById("vegetarianSection");
+const nonVegSection = document.getElementById("nonVegSection");
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Carbon emission factors (kg CO2e per kg or litre of food)
-    const carbonFactors = {
-      food: {
-        // Vegetarian / Vegan
-        vegetables: 0.2, // kg CO2e per kg
-        fruits: 0.4,    // kg CO2e per kg
-        grains_rice: 2.7, // kg CO2e per kg (rice can be high due to methane)
-        legumes_beans: 0.8, // kg CO2e per kg
-        nuts_seeds: 0.5, // kg CO2e per kg
-        dairy_milk: 1.0, // kg CO2e per litre
-        dairy_cheese: 21.0, // kg CO2e per kg (very high)
-        eggs: 4.5,     // kg CO2e per kg
+// Show relevant section based on selection
+mainSelect.addEventListener("change", function () {
+  const value = this.value;
 
-        // Non-Vegetarian
-        beef: 27.0,      // kg CO2e per kg (highest)
-        lamb_mutton: 39.0, // kg CO2e per kg (also very high)
-        pork: 12.1,      // kg CO2e per kg
-        chicken: 6.9,    // kg CO2e per kg
-        fish_farmed: 5.0, // kg CO2e per kg
-        fish_wild: 3.0   // kg CO2e per kg
-      }
-    };
+  vegetarianSection.classList.add("d-none");
+  nonVegSection.classList.add("d-none");
 
-    document.getElementById('foodCarbonForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+  if (value === "clothing") vegetarianSection.classList.remove("d-none");
+  else if (value === "grocery") nonVegSection.classList.remove("d-none");
+});
 
-      let totalCarbonFootprint = 0;
+// Remove functionality
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('remove-btn')) {
+    const row = e.target.closest('.ingredient-row');
+    if (row) row.remove();
+  }
+});
 
-      // Calculate Vegetarian/Vegan
-      document.querySelectorAll('#vegetarianFields .ingredient-row').forEach(row => {
-        const item = row.querySelector('select').value;
-        const quantity = parseFloat(row.querySelector('input[type="number"]').value);
-        if (item && quantity > 0 && carbonFactors.food[item]) {
-          totalCarbonFootprint += quantity * carbonFactors.food[item];
-        }
-      });
+// Add more functionality for Vegetarian
+document.getElementById("addVegetarian").addEventListener("click", function () {
+  const fields = document.getElementById("vegetarianFields");
+  const firstRow = fields.querySelector(".ingredient-row");
+  const newRow = firstRow.cloneNode(true);
 
-      // Calculate Non-Vegetarian
-      document.querySelectorAll('#nonVegFields .ingredient-row').forEach(row => {
-        const item = row.querySelector('select').value;
-        const quantity = parseFloat(row.querySelector('input[type="number"]').value);
-        if (item && quantity > 0 && carbonFactors.food[item]) {
-          totalCarbonFootprint += quantity * carbonFactors.food[item];
-        }
-      });
+  newRow.querySelectorAll("input").forEach(input => input.value = "");
+  newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
 
-      document.getElementById('carbonFootprintResult').textContent = totalCarbonFootprint.toFixed(2);
-      document.getElementById('resultCard').style.display = 'block';
-      document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
-    });
+  fields.appendChild(newRow);
 
-    // Add more functionality for Vegetarian/Vegan
-    document.getElementById("addVegetarian").addEventListener("click", function () {
-      const fields = document.getElementById("vegetarianFields");
-      const firstRow = fields.querySelector(".ingredient-row");
-      const newRow = firstRow.cloneNode(true);
+  const removeBtn = newRow.querySelector('.remove-btn');
+  if (removeBtn) removeBtn.style.display = 'inline-block';
+});
 
-      newRow.querySelectorAll("input").forEach(input => input.value = "");
-      newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+// Add more functionality for Non-Vegetarian
+document.getElementById("addNonVeg").addEventListener("click", function () {
+  const fields = document.getElementById("nonVegFields");
+  const firstRow = fields.querySelector(".ingredient-row");
+  const newRow = firstRow.cloneNode(true);
 
-      fields.appendChild(newRow);
+  newRow.querySelectorAll("input").forEach(input => input.value = "");
+  newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
 
-      const removeBtn = newRow.querySelector('.remove-btn');
-      if (removeBtn) removeBtn.style.display = 'inline-block';
-    });
+  fields.appendChild(newRow);
 
-    // Add more functionality for Non-Vegetarian
-    document.getElementById("addNonVeg").addEventListener("click", function () {
-      const fields = document.getElementById("nonVegFields");
-      const firstRow = fields.querySelector(".ingredient-row");
-      const newRow = firstRow.cloneNode(true);
+  const removeBtn = newRow.querySelector('.remove-btn');
+  if (removeBtn) removeBtn.style.display = 'inline-block';
+});
 
-      newRow.querySelectorAll("input").forEach(input => input.value = "");
-      newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+// Hide remove button on first static row
+document.addEventListener('DOMContentLoaded', function () {
+  const firstRemoveBtnVeg = document.querySelector('#vegetarianFields .ingredient-row .remove-btn');
+  if (firstRemoveBtnVeg) firstRemoveBtnVeg.style.display = 'none';
 
-      fields.appendChild(newRow);
+  const firstRemoveBtnNonVeg = document.querySelector('#nonVegFields .ingredient-row .remove-btn');
+  if (firstRemoveBtnNonVeg) firstRemoveBtnNonVeg.style.display = 'none';
+});
 
-      const removeBtn = newRow.querySelector('.remove-btn');
-      if (removeBtn) removeBtn.style.display = 'inline-block';
-    });
 
-    // Remove functionality
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('remove-btn')) {
-        const row = e.target.closest('.ingredient-row');
-        // Ensure at least one row remains
-        if (row && row.parentNode.querySelectorAll('.ingredient-row').length > 1) {
-          row.remove();
-        }
-      }
-    });
-
-    // Hide remove button on first static row
-    document.addEventListener('DOMContentLoaded', function () {
-      const firstRemoveBtnVeg = document.querySelector('#vegetarianFields .ingredient-row .remove-btn');
-      if (firstRemoveBtnVeg) firstRemoveBtnVeg.style.display = 'none';
-
-      const firstRemoveBtnNonVeg = document.querySelector('#nonVegFields .ingredient-row .remove-btn');
-      if (firstRemoveBtnNonVeg) firstRemoveBtnNonVeg.style.display = 'none';
-    });
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 
 </html>

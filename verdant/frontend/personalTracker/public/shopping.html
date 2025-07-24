@@ -41,280 +41,489 @@
     }
 
     .btn-custom:hover {
-      background-color: rgb(20, 70, 60);
+      background-color: rgb(8, 40, 35);
       color: white;
-    }
-
-    .form-control-custom {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-    }
-
-    .form-control-custom:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
-    }
-
-    .form-select-custom {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-    }
-
-    .form-select-custom option {
-      background-color: #0b342e;
-      color: white;
-    }
-
-    .form-select-custom:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-color: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
-    }
-
-    .card-shadow {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .ingredient-row+.ingredient-row {
-      margin-top: 15px;
     }
 
     ::placeholder {
       color: white !important;
       opacity: 1;
     }
+
+    .custom-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: #0b342e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 10px center;
+      background-size: 14px;
+      padding-right: 25px;
+    }
   </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100" style="z-index: 10;">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Verdant</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg" style="background-color: #0b342e;">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white" href="#">Verdant</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/websitetracker/index.html">Website Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/personaltracker/index.html">Personal Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about.html">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact.html">Contact</a>
-          </li>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Audit</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Sign-In</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">Contact</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#">About Us</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="hero d-flex align-items-center text-center text-white">
+  <!-- Hero Section -->
+  <div class="hero">
     <div class="hero-overlay"></div>
-    <div class="container hero-text">
-      <h1 class="display-4 fw-bold mb-3">Shopping Carbon Calculator</h1>
-      <p class="lead mb-4">Estimate your carbon footprint from various shopping categories.</p>
+    <div class="hero-text text-center">
+      <h1 class="fw-bold">Calculate Shopping Carbon Emissions</h1>
+      <p class="fs-5">Understand the environmental impact of your purchases and make eco-friendly shopping choices.</p>
     </div>
   </div>
 
   <div class="container my-5">
-    <div class="card card-shadow p-4 mb-4">
-      <h3 class="mb-4 text-center">Your Shopping Habits</h3>
-      <form id="shoppingCarbonForm">
-        <div class="mb-4">
-          <h5 class="mb-3 text-success">Groceries</h5>
-          <div id="groceryFields">
-            <div class="row ingredient-row g-3 align-items-end mb-3">
-              <div class="col-md-5">
-                <label for="groceryCategory" class="form-label">Category</label>
-                <select class="form-select" id="groceryCategory">
-                  <option value="">Select Category</option>
-                  <option value="packaged_food">Packaged Food</option>
-                  <option value="fresh_produce">Fresh Produce (local/seasonal)</option>
-                  <option value="imported_produce">Fresh Produce (imported/out of season)</option>
-                  <option value="dairy_products">Dairy Products</option>
-                  <option value="meat_poultry">Meat & Poultry</option>
-                  <option value="seafood">Seafood</option>
-                  <option value="baked_goods">Baked Goods</option>
-                </select>
-              </div>
-              <div class="col-md-5">
-                <label for="grocerySpend" class="form-label">Weekly Spend ($)</label>
-                <input type="number" class="form-control" id="grocerySpend" placeholder="e.g., 50" min="0" step="0.01">
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
-              </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="rounded shadow" style="background: white; border-radius: 15px; overflow: hidden;">
+
+          <!-- Header -->
+          <div style="background-color: #0b342e; color: white; padding: 15px 20px;">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Select Your Shopping Type:</h5>
+              <select id="mainSelect" class="form-control text-center text-white custom-select ingredient-heading"
+                style="width: 140px; border-radius: 20px; background-color: #0b342e; border: 1px solid white;">
+                <option value="" disabled selected>Shopping</option>
+                <option value="clothing">Clothing</option>
+                <option value="grocery">Grocery</option>
+                <option value="electric">Electric Items</option>
+              </select>
             </div>
           </div>
-          <button type="button" class="btn btn-outline-success btn-sm" id="addGrocery">Add More Groceries</button>
-        </div>
 
-        <div class="mb-4">
-          <h5 class="mb-3 text-info">Clothing & Textiles</h5>
-          <div id="clothingFields">
-            <div class="row ingredient-row g-3 align-items-end mb-3">
-              <div class="col-md-5">
-                <label for="clothingType" class="form-label">Item Type</label>
-                <select class="form-select" id="clothingType">
-                  <option value="">Select Item Type</option>
-                  <option value="fast_fashion">Fast Fashion Item</option>
-                  <option value="durable_clothing">Durable/Quality Clothing</option>
-                  <option value="second_hand">Second-hand Clothing</option>
-                  <option value="footwear">Footwear</option>
-                </select>
-              </div>
-              <div class="col-md-5">
-                <label for="clothingQuantity" class="form-label">Number of Items</label>
-                <input type="number" class="form-control" id="clothingQuantity" placeholder="e.g., 2" min="0" step="1">
-              </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
-              </div>
+          <!-- CLOTHING SECTION -->
+          <div id="clothingSection" class="p-4 d-none">
+            <div class="row fw-bold mb-3">
+              <div class="col-4">Clothing Item</div>
+              <div class="col-4">Fabric</div>
+              <div class="col-3">Quantity</div>
             </div>
-          </div>
-          <button type="button" class="btn btn-outline-info btn-sm" id="addClothing">Add More Clothing</button>
-        </div>
 
-        <div class="mb-4">
-          <h5 class="mb-3 text-danger">Electronics</h5>
-          <div id="electricFields">
-            <div class="row ingredient-row g-3 align-items-end mb-3">
-              <div class="col-md-5">
-                <label for="electronicType" class="form-label">Item Type</label>
-                <select class="form-select" id="electronicType">
-                  <option value="">Select Item Type</option>
-                  <option value="smartphone">Smartphone</option>
-                  <option value="laptop">Laptop/Computer</option>
-                  <option value="tv">Television</option>
-                  <option value="small_appliance">Small Home Appliance</option>
-                </select>
+
+
+            <form id="clothingForm">
+              <div id="clothingFields">
+                <div class="row mb-3 align-items-center ingredient-row">
+                  <div class="col-4">
+                    <select class="form-select" name="clothing_item[]" required>
+
+                      <option value="" disabled selected>Choose Clothing Item</option>
+                      <option value="T-shirt">T-shirt</option>
+                      <option value="Jeans">Jeans</option>
+                      <option value="Jacket">Jacket</option>
+                      <option value="Shirt">Shirt</option>
+                      <option value="Hoodie">Hoodie</option>
+                      <option value="Sweater">Sweater</option>
+                      <option value="Shorts">Shorts</option>
+                      <option value="Skirt">Skirt</option>
+                      <option value="Dress">Dress</option>
+                      <option value="Shoes">Shoes</option>
+                      <option value="Socks">Socks</option>
+                      <option value="Hat">Hat</option>
+                      <option value="Scarf">Scarf</option>
+                      <option value="Gloves">Gloves</option>
+                      <option value="Belt">Belt</option>
+                      <option value="denim">Denim</option>
+                    </select>
+
+                  </div>
+
+                  <div class="col-4">
+                    <select class="form-select" name="fabric[]" required>
+
+                      <option value="" disabled selected>Choose Material</option>
+                      <option value="cotton">Cotton</option>
+                      <option value="polyester">Polyester</option>
+                      <option value="wool">Wool</option>
+                      <option value="denim">Denim</option>
+                      <option value="leather">Leather</option>
+                      <option value="nylon">Nylon</option>
+                      <option value="acrylic">Acrylic</option>
+                      <option value="silk">Silk</option>
+                      <option value="linen">Linen</option>
+                      <option value="rayon">Rayon</option>
+                      <option value="spandex">Spandex</option>
+                      <option value="hemp">Hemp</option>
+                      <option value="viscose">Viscose</option>
+                      <option value="cashmere">Cashmere</option>
+                    </select>
+
+                  </div>
+
+                  <div class="col-3">
+                    <input type="number" class="form-control" name="quality[]" placeholder="Quality" min="1" required>
+                  </div>
+
+                  <div class="col-1 text-end">
+                    <button type="button"
+                      class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-5">
-                <label for="electronicQuantity" class="form-label">Number of Items</label>
-                <input type="number" class="form-control" id="electronicQuantity" placeholder="e.g., 1" min="0" step="1">
+
+              <div class="mb-3">
+                <button type="button" class="btn btn-link fw-bold" id="addClothing">+ Add more</button>
               </div>
-              <div class="col-md-2">
-                <button type="button" class="btn btn-danger remove-btn w-100">Remove</button>
+
+              <div class="row mb-4">
+                <div class="col text-end">
+                  <button type="submit" class="btn btn-sm px-4 py-2 shadow"
+                    style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">
+                    Calculate
+                  </button>
+                </div>
               </div>
+            </form>
+          </div>
+
+          <!-- GROCERY SECTION -->
+          <div id="grocerySection" class="p-4 d-none">
+            <div class="row fw-bold mb-3">
+              <div class="col-6">Grocery Item</div>
+              <div class="col-5">Quantity</div>
+
             </div>
-          </div>
-          <button type="button" class="btn btn-outline-danger btn-sm" id="addElectric">Add More Electronics</button>
-        </div>
 
-        <div class="text-center">
-          <button type="submit" class="btn btn-success btn-lg mt-4">Calculate Carbon Footprint</button>
+            <form id="groceryForm">
+              <div id="groceryFields">
+                <div class="row mb-3 align-items-center ingredient-row">
+                  <div class="col-6">
+                    <select class="form-select" name="grocery_item[]" required>
+
+                      <option value="" disabled selected>Choose Food Item</option>
+
+                      <optgroup label="Foods (per kg)">
+                        <option value="beef">Beef</option>
+                        <option value="pork">Pork</option>
+                        <option value="chicken">Chicken</option>
+                        <option value="fish">Fish</option>
+                        <option value="eggs">Eggs</option>
+                        <option value="cheese">Cheese</option>
+                        <option value="yogurt">Yogurt</option>
+                        <option value="bread">Bread</option>
+                        <option value="lamb">Lamb</option>
+                        <option value="tofu">Tofu</option>
+                        <option value="panner">Paneer</option>
+                        <option value="rice">Rice</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="lentils">Lentils</option>
+                        <option value="beans">Beans</option>
+                        <option value="nuts">Nuts</option>
+                        <option value="chickpeas">Chickpeas</option>
+                        <option value="oats">Oats</option>
+                        <option value="potatoes">Potatoes</option>
+                        <option value="tomatoes">Tomatoes</option>
+                        <option value="carrots">Carrots</option>
+                        <option value="onions">Onions</option>
+                        <option value="broccoli">Broccoli</option>
+                        <option value="spinach">Spinach</option>
+                        <option value="cucumbers">Cucumbers</option>
+                        <option value="peppers">Peppers</option>
+                        <option value="apples">Apples</option>
+                        <option value="bananas">Bananas</option>
+                        <option value="oranges">Oranges</option>
+                        <option value="berries">Berries</option>
+                        <option value="grapes">Grapes</option>
+                        <option value="pears">Pears</option>
+                        <option value="kiwis">Kiwis</option>
+                        <option value="avocados">Avocados</option>
+                        <option value="lemons">Lemons</option>
+                        <option value="limes">Limes</option>
+                        <option value="peaches">Peaches</option>
+                        <option value="plums">Plums</option>
+                        <option value="cherries">Cherries</option>
+                        <option value="blackberries">Blackberries</option>
+                        <option value="strawberries">Strawberries</option>
+                        <option value="watermelon">Watermelon</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="grains">Grains</option>
+                        <option value="legumes">Legumes</option>
+                        <option value="nuts_seeds">Nuts & Seeds</option>
+                        <option value="herbs_spices">Herbs & Spices</option>
+                        <option value="sugar">Sugar</option>
+                        <option value="salt">Salt</option>
+                        <option value="honey">Honey</option>
+                        <option value="chocolate">Chocolate</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="sauces">Sauces</option>
+                        <option value="processed_foods">Processed Foods</option>
+                      </optgroup>
+
+                      <optgroup label="Beverages (per litre)">
+                        <option value="milk">Milk</option>
+                        <option value="juice">Juice</option>
+                        <option value="soda">Soda</option>
+                        <option value="water">Water</option>
+                        <option value="beer">Beer</option>
+                        <option value="wine">Wine</option>
+                        <option value="spirits">Spirits</option>
+                        <option value="soft_drinks">Soft Drinks</option>
+                        <option value="juices">Juices</option>
+                        <option value="alcohol">Alcohol</option>
+                        <option value="coffee">Coffee</option>
+                        <option value="tea">Tea</option>
+                        <option value="oils_fats">Oils & Fats</option>
+                        <option value="bottled_water">Bottled Water</option>
+                        <option value="plant_based_milk">Plant-Based Milk</option>
+                        <option value="nut_milk">Nut Milk</option>
+                      </optgroup>
+
+                    </select>
+
+                  </div>
+
+                  <div class="col-5">
+                    <input type="number" class="form-control" name="grocery_quantity[]" placeholder="Quantity" min="1"
+                      required>
+                  </div>
+
+                  <div class="col-1 text-end">
+                    <button type="button"
+                      class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <button type="button" class="btn btn-link fw-bold" id="addGrocery">+ Add more</button>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col text-end">
+                  <button type="submit" class="btn btn-sm px-4 py-2 shadow"
+                    style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">
+                    Calculate
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- ELECTRIC ITEMS SECTION -->
+          <div id="electricSection" class="p-4 d-none">
+            <div class="row fw-bold mb-3">
+              <div class="col-6">Electric Item</div>
+              <div class="col-5">Quantity</div>
+
+            </div>
+
+            <form id="electricForm">
+              <div id="electricFields">
+                <div class="row mb-3 align-items-center ingredient-row">
+                  <div class="col-6">
+                    <select class="form-select" name="electric_item[]" required>
+
+                      <option value="" disabled selected>Choose Electronic Item</option>
+
+                      <optgroup label="General Electronics">
+                        <option value="smartphone">Smartphone</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="television">Television</option>
+                        <option value="smartwatch">Smartwatch</option>
+                        <option value="headphones">Headphones</option>
+                        <option value="camera">Camera</option>
+                        <option value="printer">Printer</option>
+                        <option value="gaming_console">Gaming Console</option>
+                        <option value="wi_fi_router">Wi-Fi Router</option>
+                        <option value="washing_machine">Washing Machine</option>
+                        <option value="refrigerator">Refrigerator</option>
+                        <option value="desktop_computer">Desktop Computer</option>
+                      </optgroup>
+
+                      <optgroup label="Air Conditioners">
+                        <option value="windows_ac_1_ton">Windows AC - 1.0 Ton</option>
+                        <option value="windows_ac_1_5_ton">Windows AC - 1.5 Ton</option>
+                        <option value="split_ac_1_ton">Split AC - 1.0 Ton</option>
+                        <option value="split_ac_1_5_ton">Split AC - 1.5 Ton</option>
+                        <option value="inverter_split_ac_1_5_ton">Inverter Split AC - 1.5 Ton</option>
+                        <option value="inverter_split_ac_2_plus_ton">Inverter Split AC - 2.0+ Ton</option>
+                      </optgroup>
+
+                    </select>
+
+                  </div>
+
+                  <div class="col-5">
+                    <input type="number" class="form-control" name="electric_quantity[]" placeholder="Quantity" min="1"
+                      required>
+                  </div>
+
+                  <div class="col-1 text-end">
+                    <button type="button"
+                      class="btn btn-sm btn-outline-danger rounded-circle remove-btn">&times;</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <button type="button" class="btn btn-link fw-bold" id="addElectric">+ Add more</button>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col text-end">
+                  <button type="submit" class="btn btn-sm px-4 py-2 shadow"
+                    style="background-color: #0b342e; color: white; border-radius: 30px; font-weight: 600;">
+                    Calculate
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
+  </div>
+  <!-- Shopping Article Section -->
 
-    <div class="card card-shadow p-4 mt-4" id="resultCard" style="display: none;">
-      <h3 class="text-center text-success mb-3">Your Estimated Shopping Carbon Footprint</h3>
-      <p class="lead text-center mb-0">
-        <span id="carbonFootprintResult" class="fw-bold fs-4"></span> kg CO2e
+  <div class="container my-5">
+    <div class="p-4" style="background-color: #f8f9fa; border-radius: 15px;">
+
+      <h3 class="fw-bold mb-4 mt-4" style="color: #0b342e;">How to Lower Your Shopping Carbon Footprint</h3>
+
+      <p>Shopping choices have a significant impact on the environment. From production and packaging to
+        transportation and disposal, everything we buy contributes to carbon emissions. Making mindful shopping
+        decisions can greatly reduce your personal footprint.</p>
+
+      <p>Here are four practical ways to cut down the carbon footprint of your shopping habits.</p>
+
+      <img src="/verdant/frontend/images/shopping3.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
+
+      <h5 class="fw-bold mt-4" style="color: #0b342e;">1. Buy only what you need</h5>
+      <p>Impulse purchases often lead to waste. Before buying, ask yourself if you truly need the item. Planning your
+        purchases helps reduce unnecessary consumption and the emissions associated with production and delivery.</p>
+
+      <h5 class="fw-bold mt-4 mb-4" style="color: #0b342e;">2. Choose sustainable and local products</h5>
+      <p>Buying locally produced goods reduces transportation emissions and supports your community’s economy.
+        Additionally, opt for products made from recycled or sustainable materials to further lower your footprint.
       </p>
-      <p class="text-muted text-center mt-2">
-        This is an estimate based on your provided data. Actual emissions can vary based on production,
-        materials, and supply chain.
-      </p>
+      <img src="/verdant/frontend/images/shopping7.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
+
+      <h5 class="fw-bold mt-4 m" style="color: #0b342e;">3. Avoid excessive packaging</h5>
+      <p>Packaging contributes significantly to carbon emissions, especially single-use plastics. Choose products with
+        minimal or eco-friendly packaging, and carry your own bags to avoid disposable ones.</p>
+
+      <h6 class="fw-bold">Example: Shopping for vegetables</h6>
+
+      <p>Buying loose vegetables instead of pre-packaged ones saves plastic waste and reduces emissions from packaging
+        production and disposal.</p>
+      <img src="/verdant/frontend/images/shopping11.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
+
+      <h5 class="fw-bold mt-4" style="color: #0b342e;">4. Choose quality over quantity</h5>
+      <p>High-quality products last longer, reducing the frequency of replacement purchases. This not only saves money
+        in the long run but also lowers emissions associated with manufacturing and delivery.</p>
+
+      <img src="/verdant/frontend/images/shopping2.jpg"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
+
+      <h5 class="fw-bold mt-4" style="color: #0b342e;">Conclusion</h5>
+      <p>Reducing your shopping carbon footprint is possible through thoughtful choices. Buy only what you need,
+        prefer local and sustainable products, avoid excessive packaging, and invest in quality items to contribute to
+        a greener planet.</p>
+
+      <img src="/verdant/frontend/images/shopping6.png"
+        style="height: 400px; width: 70%; display: block; margin: auto;">
+
     </div>
   </div>
 
-  <a href="../../faq.html" class="btn btn-dark position-fixed bottom-0 end-0 m-3 rounded-pill">FAQs</a>
 
-  <footer class="text-white py-4 mt-5" style="background-color: #0b342e;">
+
+
+
+
+
+  <footer class="mt-auto text-white py-4" style="background-color: #0b342e;">
     <div class="container text-center">
-      <p class="mb-1">© 2025 Verdant. All rights reserved.</p>
+      <p class="mb-1">© 2025 Reliable Deployment. All rights reserved.</p>
       <p class="mb-0">
-        <a href="../../about.html" class="text-white text-decoration-none me-3">About</a>
-        <a href="../../contact.html" class="text-white text-decoration-none">Contact</a>
+        <a href="about.html" class="text-white text-decoration-none me-3">About</a>
+        <a href="contact.html" class="text-white text-decoration-none me-3">Contact</a>
+        <a href="faq.html" class="text-white text-decoration-none">FAQs</a>
       </p>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Carbon emission factors (kg CO2e per unit or per item)
-    const carbonFactors = {
-      groceries: {
-        packaged_food: 0.5,    // kg CO2e per $10 spent (example average)
-        fresh_produce: 0.3,    // kg CO2e per $10 spent
-        imported_produce: 0.8, // kg CO2e per $10 spent
-        dairy_products: 0.7,   // kg CO2e per $10 spent
-        meat_poultry: 2.0,     // kg CO2e per $10 spent (can vary)
-        seafood: 1.5,          // kg CO2e per $10 spent (can vary)
-        baked_goods: 0.4       // kg CO2e per $10 spent
-      },
-      clothing: {
-        fast_fashion: 10,     // kg CO2e per item (high impact, short lifespan)
-        durable_clothing: 20, // kg CO2e per item (higher initial, but longer lifespan)
-        second_hand: 1,       // kg CO2e per item (very low, reuse)
-        footwear: 15          // kg CO2e per pair
-      },
-      electronics: {
-        smartphone: 60,      // kg CO2e per item (manufacturing + usage)
-        laptop: 200,         // kg CO2e per item
-        tv: 150,             // kg CO2e per item
-        small_appliance: 30  // kg CO2e per item
-      }
-    };
+    const mainSelect = document.getElementById("mainSelect");
 
-    document.getElementById('shoppingCarbonForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+    const clothingSection = document.getElementById("clothingSection");
+    const grocerySection = document.getElementById("grocerySection");
+    const electricSection = document.getElementById("electricSection");
 
-      let totalCarbonFootprint = 0;
+    // Show relevant section based on selection
+    mainSelect.addEventListener("change", function () {
+      const value = this.value;
 
-      // Calculate Groceries
-      document.querySelectorAll('#groceryFields .ingredient-row').forEach(row => {
-        const category = row.querySelector('select').value;
-        const spend = parseFloat(row.querySelector('input[type="number"]').value);
-        if (category && spend > 0 && carbonFactors.groceries[category]) {
-          // Assuming $10 as a base for the factor
-          totalCarbonFootprint += (spend / 10) * carbonFactors.groceries[category];
-        }
-      });
+      clothingSection.classList.add("d-none");
+      grocerySection.classList.add("d-none");
+      electricSection.classList.add("d-none");
 
-      // Calculate Clothing & Textiles
-      document.querySelectorAll('#clothingFields .ingredient-row').forEach(row => {
-        const type = row.querySelector('select').value;
-        const quantity = parseFloat(row.querySelector('input[type="number"]').value);
-        if (type && quantity > 0 && carbonFactors.clothing[type]) {
-          totalCarbonFootprint += quantity * carbonFactors.clothing[type];
-        }
-      });
-
-      // Calculate Electronics
-      document.querySelectorAll('#electricFields .ingredient-row').forEach(row => {
-        const type = row.querySelector('select').value;
-        const quantity = parseFloat(row.querySelector('input[type="number"]').value);
-        if (type && quantity > 0 && carbonFactors.electronics[type]) {
-          totalCarbonFootprint += quantity * carbonFactors.electronics[type];
-        }
-      });
-
-      document.getElementById('carbonFootprintResult').textContent = totalCarbonFootprint.toFixed(2);
-      document.getElementById('resultCard').style.display = 'block';
-      document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
+      if (value === "clothing") clothingSection.classList.remove("d-none");
+      else if (value === "grocery") grocerySection.classList.remove("d-none");
+      else if (value === "electric") electricSection.classList.remove("d-none");
     });
 
-    // Add more functionality for Groceries
+    // Remove functionality with reset to main select
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('remove-btn')) {
+        // Remove the input row
+        const row = e.target.closest('.ingredient-row');
+        if (row) row.remove();
+
+        // Reset main selection if no rows remain in the section
+        if (document.querySelectorAll('.ingredient-row').length === 0) {
+          mainSelect.selectedIndex = 0;
+          clothingSection.classList.add("d-none");
+          grocerySection.classList.add("d-none");
+          electricSection.classList.add("d-none");
+        }
+      }
+    });
+    // Add more functionality for Clothing
+    document.getElementById("addClothing").addEventListener("click", function () {
+      const fields = document.getElementById("clothingFields");
+      const firstRow = fields.querySelector(".ingredient-row");
+      const newRow = firstRow.cloneNode(true);
+      fields.appendChild(newRow);
+
+      // Show remove button for cloned rows only
+      const removeBtn = newRow.querySelector('.remove-btn');
+      if (removeBtn) removeBtn.style.display = 'inline-block';
+    });
+
+    // Hide remove button on first static row
+    document.addEventListener('DOMContentLoaded', function () {
+      const firstRemoveBtn = document.querySelector('#clothingFields .ingredient-row .remove-btn');
+      if (firstRemoveBtn) firstRemoveBtn.style.display = 'none';
+    });
+    // Add more functionality for Grocery
     document.getElementById("addGrocery").addEventListener("click", function () {
       const fields = document.getElementById("groceryFields");
       const firstRow = fields.querySelector(".ingredient-row");
       const newRow = firstRow.cloneNode(true);
-      newRow.querySelectorAll("input").forEach(input => input.value = "");
-      newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
       fields.appendChild(newRow);
 
       // Show remove button for cloned rows only
@@ -326,25 +535,6 @@
     document.addEventListener('DOMContentLoaded', function () {
       const firstRemoveBtnGrocery = document.querySelector('#groceryFields .ingredient-row .remove-btn');
       if (firstRemoveBtnGrocery) firstRemoveBtnGrocery.style.display = 'none';
-    });
-    // Add more functionality for Clothing
-    document.getElementById("addClothing").addEventListener("click", function () {
-      const fields = document.getElementById("clothingFields");
-      const firstRow = fields.querySelector(".ingredient-row");
-      const newRow = firstRow.cloneNode(true);
-      newRow.querySelectorAll("input").forEach(input => input.value = "");
-      newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
-      fields.appendChild(newRow);
-
-      // Show remove button for cloned rows only
-      const removeBtn = newRow.querySelector('.remove-btn');
-      if (removeBtn) removeBtn.style.display = 'inline-block';
-    });
-
-    // Hide remove button on first static row
-    document.addEventListener('DOMContentLoaded', function () {
-      const firstRemoveBtnClothing = document.querySelector('#clothingFields .ingredient-row .remove-btn');
-      if (firstRemoveBtnClothing) firstRemoveBtnClothing.style.display = 'none';
     });
     // Add more functionality for Electric
     document.getElementById("addElectric").addEventListener("click", function () {
@@ -369,13 +559,10 @@
 
 
 
-
   </script>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-DNzmWtx4pD+K0L+0m+fS+0J+0B+0T+0C+0A+0E+0F+0G+0H+0I+0J+0K+0L+0M+0N+0O+0P+0Q+0R+0S+0T+0U+0V+0W+0X+0Y+0Z"
-    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
