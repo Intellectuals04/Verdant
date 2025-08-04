@@ -1,3 +1,4 @@
+// websitetracker/controllers/auditController.js
 const { runLighthouseAudit } = require('../services/lighthouseService');
 const { scrapePageResources } = require('../services/scraperService');
 const { checkGreenHosting } = require('../services/hostingService');
@@ -7,6 +8,7 @@ const { scrapeDetailedPageData, breakdownResources } = require('../services/page
 
 // Import the new Mongoose model
 const AuditReport = require('../models/AuditReport');
+// const { ConsoleMessage } = require('puppeteer'); // This import seems unused and could be removed
 
 exports.auditWebsite = async (req, res) => {
   try {
@@ -53,16 +55,17 @@ exports.auditWebsite = async (req, res) => {
     // 9️⃣ Save the report to MongoDB
     const newReport = new AuditReport(auditReport);
     await newReport.save();
-    console.log('✅ Audit report saved to MongoDB:', newReport._id);
 
     // 🔟 Send a success response back to the frontend
     res.status(200).json({
       message: 'Audit complete. Report saved to MongoDB.',
-      reportId: newReport._id
+      reportId: newReport._id,
+      // --- ADDED/MODIFIED LINE BELOW ---
+      detailedReport: auditReport // Send the full auditReport object
     });
 
   } catch (error) {
     console.error('Audit failed:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error', details: error.message }); // Added error.message for more detail
   }
 };
