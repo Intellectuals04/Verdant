@@ -6,6 +6,7 @@ const auditReportSchema = new mongoose.Schema({
     required: true
   },
   lighthouseScore: Number,
+  performanceScore: Number,
   carbonAnalysis: Object,
   resourceData: Object,
   heuristics: Object,

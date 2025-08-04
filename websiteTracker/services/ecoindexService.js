@@ -11,10 +11,7 @@ exports.runEcoIndexAnalysis = async (url) => {
         const websiteResponse = await axios.head(url); // Use HEAD request to get headers without downloading full content
         siteBytes = parseInt(websiteResponse.headers['content-length'], 10);
 
-        // Optional: Implement logic to determine if the host is green.
-        // This is often not easily discoverable from just the URL/headers.
-        // For simplicity, we'll keep it at 0 unless you have a separate service for this.
-        // isGreenHosted = await checkIfGreenHost(url); // Placeholder for a function you'd need to write
+        isGreenHosted = await checkIfGreenHost(url); 
 
         if (isNaN(siteBytes) || siteBytes <= 0) {
             console.warn(`Could not determine content length for ${url}. Skipping WebsiteCarbon API call.`);
@@ -53,5 +50,5 @@ exports.runEcoIndexAnalysis = async (url) => {
 };
 
 async function checkIfGreenHost(url) {
-    return 0; 
+    return 0; // 0 for false, 1 for true
 }

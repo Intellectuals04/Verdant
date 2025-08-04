@@ -28,7 +28,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../', 'verdant', 'frontend')));
 
 // API routes
 app.use('/api', auditRoutes);
@@ -36,3 +36,24 @@ app.use('/api', auditRoutes);
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
 });
+app.get('/',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'index.html'));
+})
+app.get('/websiteTracker',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'websiteTracker','index.html'));
+})
+app.get('/personalTracker',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','index.html'));
+})
+app.get('/personalTracker/energy',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','public','energy.html'));
+})
+app.get('/personalTracker/food',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','public','food.html'));
+})
+app.get('/personalTracker/shopping',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','public','shopping.html'));
+})
+app.get('/personalTracker/transport',(req,res)=>{
+  res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','public','transport.html'));
+})
