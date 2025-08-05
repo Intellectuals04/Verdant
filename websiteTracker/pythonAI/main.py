@@ -5,6 +5,11 @@ import google.generativeai as genai
 import json
 from markupsafe import Markup
 from mongodb import get_latest_audit_report  # ⬅️ your custom MongoDB utility
+import os
+from os import getenv
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ✅ Initialize FastAPI
 app = FastAPI()
@@ -18,8 +23,7 @@ def tojson_filter(value):
 templates.env.filters["tojson"] = tojson_filter
 
 # ✅ Set OpenAI key securely
-# openai.api_key = "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"  # You can use dotenv for security
-genai.configure(api_key="AIzaSyCMHG78XXBZsquGMl4VAcj0Q2BNf7JCOw0")  # Secure this properly
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))  # Secure this properly
 
 model = genai.GenerativeModel("gemini-2.5-pro")
 

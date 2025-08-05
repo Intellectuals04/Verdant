@@ -1,9 +1,11 @@
 from pymongo import MongoClient
-
+import os
+from os import getenv
+from dotenv import load_dotenv
+load_dotenv()
 # ✅ MongoDB Connection
-MONGO_URI = "mongodb+srv://verdant:Verdant%40130725@cluster0.jineugw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
-client = MongoClient(MONGO_URI)
+MONGODB_URI = os.getenv("MONGODB_URI")
+client = MongoClient(MONGODB_URI)
 db = client["test"]  # Your database name
 collection = db["auditreports"]
 
