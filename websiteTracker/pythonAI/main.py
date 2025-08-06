@@ -11,11 +11,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from pathlib import Path
+
+# Set base directory
+BASE_DIR = Path(__file__).resolve().parent
+
+# Set templates and static directories
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+# static_dir = BASE_DIR / "static"
 # ✅ Initialize FastAPI
 app = FastAPI()
-
-# ✅ Initialize Jinja2 templates
-templates = Jinja2Templates(directory="templates")
 
 # ✅ Add `tojson` filter to Jinja
 def tojson_filter(value):
@@ -76,5 +81,6 @@ async def analyze(request: Request):
         "request": request,
         "summary": f"This website emits {chart_data['values'][0]}g CO₂ per visit. Lighthouse Score: {chart_data['values'][2]}.",
         "chart_data": chart_data,
-        "suggestions": ai_suggestions
+        "suggestions": ai_suggestions,
+        "report": report
     })
