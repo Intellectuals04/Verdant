@@ -6,6 +6,14 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+// Proxy to FastAPI
+app.use('/report', createProxyMiddleware({
+  target: 'http://127.0.0.1:8001',
+  changeOrigin: true
+}));
+
 
 // Now, safely import from config.js after dotenv has run
 const { port, greenWebAPI, mongoURI } = require('./config/config');

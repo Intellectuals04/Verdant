@@ -437,6 +437,7 @@ We grade your website based on energy efficiency, load speed, data transfer, and
 
           const result = await response.json();
           downloadJSON(result, 'audit-report.json');
+          window.location.href = '/report';
 
         } catch (error) {
           console.error('Audit failed:', error);
