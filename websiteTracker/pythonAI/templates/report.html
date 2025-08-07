@@ -24,13 +24,13 @@
 
     <div class="mb-4">
         <p class="fw-semibold mb-0">Website:</p>
-        <p class="text-primary fw-bold mb-0">{{ report.detailedReport.url }}</p>
+        <p class="text-primary fw-bold mb-0">{{ report.url }}</p>
     </div>
 
     <div class="mb-4">
         <p class="fw-semibold mb-0">Green Hosting Status:</p>
         <p class="{% if report.greenHosting %}text-success{% else %}text-danger{% endif %} fw-bold mb-0">
-            {{% if report.detailedReport.greenHosting %}}Green Hosted{{% else %}}Not Green Hosted{{% endif %}}
+            {% if report.greenHosting %}Green Hosted{% else %}Not Green Hosted{% endif %}
         </p>
     </div>
 
@@ -54,7 +54,7 @@
         <div class="col-md-4">
             <div class="card text-white bg-warning mb-3">
                 <div class="card-body">
-                    <h2 class="card-title">{{ report.detailedReport.lighthouseScore }}/100</h2>
+                    <h2 class="card-title">{{ report.lighthouseScore }}/100</h2>
                     <p class="card-text">Lighthouse Score</p>
                 </div>
             </div>
@@ -66,19 +66,19 @@
         <div class="col-md-4"><span class="emoji">📝</span>Documents: <strong>{{ report.resourceData.documents }}</strong></div>
         <div class="col-md-4"><span class="emoji">🎨</span>Stylesheets: <strong>{{ report.resourceData.stylesheets }}</strong></div>
         <div class="col-md-4"><span class="emoji">📜</span>Scripts: <strong>{{ report.resourceData.scripts }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.detailedReport.breakdown.js }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎬</span>CSS: <strong>{{ report.detailedReport.breakdown.css }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🖼️</span>Images: <strong>{{ report.detailedReport.breakdown.images }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Fonts: <strong>{{ report.detailedReport.breakdown.fonts }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Videos: <strong>{{ report.detailedReport.breakdown.videos }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Others: <strong>{{ report.detailedReport.breakdown.others }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.js }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🎬</span>CSS: <strong>{{ report.css }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🖼️</span>Images: <strong>{{ report.images }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🔤</span>Fonts: <strong>{{ report.fonts }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🔤</span>Videos: <strong>{{ report.videos }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🔤</span>Others: <strong>{{ report.others }}</strong></div>
     </div>
 
     <h3 class="mt-5">💡 Recommendations</h3>
     <ul class="list-unstyled">
-        {{% for suggestion in suggestions %}}
+        {% for suggestion in suggestions %}
             <li><span class="emoji">✅</span>{{ suggestion }}</li>
-        {{% endfor %}}
+        {% endfor %}
     </ul>
 
 </body>
