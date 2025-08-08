@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import google.generativeai as genai
 import json
@@ -12,15 +13,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from pathlib import Path
+app = FastAPI()
 
-# Set base directory
 BASE_DIR = Path(__file__).resolve().parent
 
-# Set templates and static directories
+app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
+
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
-# static_dir = BASE_DIR / "static"
-# ✅ Initialize FastAPI
-app = FastAPI()
 
 # ✅ Add `tojson` filter to Jinja
 def tojson_filter(value):
