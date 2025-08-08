@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Website Audit Report</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <style>
         .emoji {
             font-size: 1.2em;
@@ -63,7 +63,7 @@
 
     <h3 class="mb-3">📊 Resource Data</h3>
     <div class="row">
-        <div class="col-md-4"><span class="emoji">📝</span>Documents: <strong>{{ report.resourceData.documents }}</strong></div>
+        <div>Documents: <strong>{{ report.resourceData.documents }}</strong></div>
         <div class="col-md-4"><span class="emoji">🎨</span>Stylesheets: <strong>{{ report.resourceData.stylesheets }}</strong></div>
         <div class="col-md-4"><span class="emoji">📜</span>Scripts: <strong>{{ report.resourceData.scripts }}</strong></div>
         <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.js }}</strong></div>
