@@ -8,6 +8,7 @@ from mongodb import get_latest_audit_report  # ⬅️ your custom MongoDB utilit
 import os
 from os import getenv
 from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
@@ -18,10 +19,14 @@ BASE_DIR = Path(__file__).resolve().parent
 
 # Set templates and static directories
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
-# static_dir = BASE_DIR / "static"
+
+
+
+
 # ✅ Initialize FastAPI
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 # ✅ Add `tojson` filter to Jinja
 def tojson_filter(value):
     return Markup(json.dumps(value))
