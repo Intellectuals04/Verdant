@@ -9,9 +9,10 @@ from mongodb import get_latest_audit_report  # ⬅️ your custom MongoDB utilit
 import os
 from os import getenv
 from dotenv import load_dotenv
-
+from fastapi.staticfiles import StaticFiles
+ 
 load_dotenv()
-
+ 
 from pathlib import Path
 app = FastAPI()
 
