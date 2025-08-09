@@ -3,83 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <title>Website Audit Report</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 960px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .bg-custom-green {
+            background-color: #d4edda !important;
+            color: #155724 !important;
+        }
+        .bg-custom-info {
+            background-color: #d1ecf1 !important;
+            color: #0c5460 !important;
+        }
+        .bg-custom-warning {
+            background-color: #fff3cd !important;
+            color: #856404 !important;
+        }
+        .bg-custom-danger {
+            background-color: #f8d7da !important;
+            color: #721c24 !important;
+        }
         .emoji {
-            font-size: 1.2em;
-            margin-right: 6px;
+            font-size: 1.2rem;
+            margin-right: 8px;
         }
-        .card-title {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-        .card-body h2 {
-            font-size: 1.5rem;
+        .list-unstyled li {
+            background-color: #e9ecef;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
         }
     </style>
 </head>
 <body class="container py-5">
 
-    <h1 class="mb-4">🌐 Audit Report</h1>
+    <header class="text-center mb-5">
+        <h1 class="display-4 fw-bold">🌐 Website Audit Report</h1>
+        <p class="lead text-muted">Analysis for <a href="{{ report.url }}" class="text-decoration-none">{{ report.url }}</a></p>
+    </header>
 
-    <div class="mb-4">
-        <p class="fw-semibold mb-0">Website:</p>
-        <p class="text-primary fw-bold mb-0">{{ report.url }}</p>
-    </div>
+    <hr class="my-4">
 
-    <div class="mb-4">
-        <p class="fw-semibold mb-0">Green Hosting Status:</p>
-        <p class="{% if report.greenHosting %}text-success{% else %}text-danger{% endif %} fw-bold mb-0">
-            {% if report.greenHosting %}Green Hosted{% else %}Not Green Hosted{% endif %}
-        </p>
-    </div>
-
-    <div class="row text-center mb-4">
-        <div class="col-md-4">
-            <div class="card text-white bg-success mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{ report.carbonAnalysis.co2PerVisit | round(5) }}g</h2>
-                    <p class="card-text">CO₂ per visit</p>
+    <section class="mb-5">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="card h-100 bg-custom-green">
+                    <div class="card-body">
+                        <h2 class="card-title display-5 fw-bold">{{ report.carbonAnalysis.co2PerVisit | round(5) }}g</h2>
+                        <p class="card-text fw-semibold">CO₂ per visit</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 bg-custom-info">
+                    <div class="card-body">
+                        <h2 class="card-title display-5 fw-bold">{{ report.carbonAnalysis.cleanerThan }}</h2>
+                        <p class="card-text fw-semibold">Cleaner Than</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 {% if report.lighthouseScore < 50 %}bg-custom-danger{% else %}bg-custom-warning{% endif %}">
+                    <div class="card-body">
+                        <h2 class="card-title display-5 fw-bold">{{ report.lighthouseScore }}</h2>
+                        <p class="card-text fw-semibold">Lighthouse Score</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{ report.carbonAnalysis.cleanerThan }}%</h2>
-                    <p class="card-text">Cleaner Than</p>
+    </section>
+
+    <hr class="my-4">
+
+    <section class="mb-5">
+        <h3 class="mb-4 text-center">📊 Resource Breakdown</h3>
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><span class="emoji">📝</span>JS</p>
+                        <h4 class="card-title">{{ (report.breakdown.js / 1024) | round(2) }} KB</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><span class="emoji">🎨</span>CSS</p>
+                        <h4 class="card-title">{{ (report.breakdown.css / 1024) | round(2) }} KB</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><span class="emoji">🖼️</span>Images</p>
+                        <h4 class="card-title">{{ (report.breakdown.images / 1024) | round(2) }} KB</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><span class="emoji">🔤</span>Fonts</p>
+                        <h4 class="card-title">{{ (report.breakdown.fonts / 1024) | round(2) }} KB</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><span class="emoji">🎬</span>Videos</p>
+                        <h4 class="card-title">{{ (report.breakdown.videos / 1024) | round(2) }} KB</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <p class="card-text fw-bold"><span class="emoji">📁</span>Others</p>
+                        <h4 class="card-title">{{ (report.breakdown.others / 1024) | round(2) }} KB</h4>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-warning mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">{{ report.lighthouseScore }}/100</h2>
-                    <p class="card-text">Lighthouse Score</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
-    <h3 class="mb-3">📊 Resource Data</h3>
-    <div class="row">
-        <div class="col-md-4"><span class="emoji">📝</span>Documents: <strong>{{ report.resourceData.documents }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎨</span>Stylesheets: <strong>{{ report.resourceData.stylesheets }}</strong></div>
-        <div class="col-md-4"><span class="emoji">📜</span>Scripts: <strong>{{ report.resourceData.scripts }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.js }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎬</span>CSS: <strong>{{ report.css }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🖼️</span>Images: <strong>{{ report.images }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Fonts: <strong>{{ report.fonts }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Videos: <strong>{{ report.videos }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Others: <strong>{{ report.others }}</strong></div>
-    </div>
+    <hr class="my-4">
 
-    <h3 class="mt-5">💡 Recommendations</h3>
-    <ul class="list-unstyled">
-        {% for suggestion in suggestions %}
-            <li><span class="emoji">✅</span>{{ suggestion }}</li>
-        {% endfor %}
-    </ul>
+    <section class="mb-5">
+        <h3 class="mb-4 text-center">💡 Suggestions</h3>
+        <ul class="list-unstyled">
+            {% for suggestion in suggestions %}
+                <li><span class="emoji">✅</span>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
+    </section>
 
 </body>
 </html>
