@@ -64,14 +64,14 @@
     <h3 class="mb-3">📊 Resource Data</h3>
     <div class="row">
         <div>Documents: <strong>{{ report.resourceData.documents }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎨</span>Stylesheets: <strong>{{ report.stylesheets }}</strong></div>
-        <div class="col-md-4"><span class="emoji">📜</span>Scripts: <strong>{{ report.scripts }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.js }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🎬</span>CSS: <strong>{{ report.css }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🖼️</span>Images: <strong>{{ report.images }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Fonts: <strong>{{ report.fonts }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Videos: <strong>{{ report.videos }}</strong></div>
-        <div class="col-md-4"><span class="emoji">🔤</span>Others: <strong>{{ report.others }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🎨</span>Stylesheets: <strong>{{ report.pageAnalysis.stylesheets }}</strong></div>
+        <div class="col-md-4"><span class="emoji">📜</span>Scripts: <strong>{{ report.pageAnalysis.totalScripts }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.breakdown.js }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🎬</span>CSS: <strong>{{ report.breakdown.css }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🖼️</span>Images: <strong>{{ report.breakdown.images }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🔤</span>Fonts: <strong>{{ report.breakdown.fonts }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🔤</span>Videos: <strong>{{ report.breakdown.videos }}</strong></div>
+        <div class="col-md-4"><span class="emoji">🔤</span>Others: <strong>{{ report.breakdown.others }}</strong></div>
     </div>
 
     <h3 class="mt-5">💡 Recommendations</h3>

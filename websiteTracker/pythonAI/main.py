@@ -23,6 +23,7 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 # ✅ Correct templates path
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 # ✅ Add `tojson` filter to Jinja
 def tojson_filter(value):
     return Markup(json.dumps(value))
