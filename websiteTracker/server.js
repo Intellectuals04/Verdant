@@ -50,7 +50,7 @@ app.get('/',(req,res)=>{
 app.get('/websiteTracker',(req,res)=>{
   res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'websiteTracker','index.html'));
 })
-app.get('/personalTracker',(req,res)=>{
+/* app.get('/personalTracker',(req,res)=>{
   res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','index.html'));
 })
 app.get('/personalTracker/energy',(req,res)=>{
@@ -64,4 +64,32 @@ app.get('/personalTracker/shopping',(req,res)=>{
 })
 app.get('/personalTracker/transport',(req,res)=>{
   res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','public','transport.html'));
-})
+}) */
+app.post('/personalTracker/energy', (req, res) => {
+  const userQuery = req.body.query;
+
+  const ragResponse = "This is a placeholder response for your RAG model.";
+
+  res.json({ response: ragResponse });
+});
+app.post('/personalTracker/food', (req, res) => {
+  const userQuery = req.body.query;
+
+  const ragResponse = "This is a placeholder response for your RAG model.";
+
+  res.json({ response: ragResponse });
+});
+app.post('/personalTracker/shopping', (req, res) => {
+  const userQuery = req.body.query;
+
+  const ragResponse = "This is a placeholder response for your RAG model.";
+
+  res.json({ response: ragResponse });
+});
+app.post('/personalTracker/transportation', (req, res) => {
+  const userQuery = req.body.query;
+
+  const ragResponse = "This is a placeholder response for your RAG model.";
+
+  res.json({ response: ragResponse });
+});

@@ -14,10 +14,6 @@ BASE_DIR = Path(__file__).resolve().parent
 load_dotenv()
 
 app = FastAPI()
-
-# ✅ Correct static mount
-app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
-
 # ✅ Correct templates path
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
@@ -42,6 +38,8 @@ def generate_ai_suggestions(report):
     suggestions_text = response.text.strip()
     return [line.strip("-\u2022 ") for line in suggestions_text.split("\n") if line.strip()]
 
+# ... (rest of the file remains the same)
+
 @app.get("/", response_class=HTMLResponse)
 async def analyze(request: Request):
     report = get_latest_audit_report()
@@ -61,7 +59,7 @@ async def analyze(request: Request):
             "summary": "No report found",
             "chart_data": {},
             "suggestions": [],
-            "report": {}
+            "report": {} # ✅ This line is already correct for the 'no report' case
         })
 
     # ✅ Extract metrics
@@ -85,5 +83,6 @@ async def analyze(request: Request):
         "summary": f"This website emits {chart_data['values'][0]}g CO₂ per visit. Lighthouse Score: {chart_data['values'][2]}",
         "chart_data": chart_data,
         "suggestions": ai_suggestions,
+        "report": report # ✅ ADD THIS LINE
     })
 
