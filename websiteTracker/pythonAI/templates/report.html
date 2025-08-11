@@ -140,10 +140,10 @@
             </div>
         </div>
     </div>
-
-    <h3 class="mb-3">📊 Resource Data</h3>
+<br>
+    <h3 class="mb-3 text-center">📊 Resource Data</h3>
     <div class="row">
-        <div>Documents: <strong>{{ report.resourceData.documents }}</strong></div>
+        <div> <strong>{{ report.resourceData.documents }}</strong></div>
         <div class="col-md-4"><span class="emoji">🎨</span>Stylesheets: <strong>{{ report.pageAnalysis.stylesheets }}</strong></div>
         <div class="col-md-4"><span class="emoji">📜</span>Scripts: <strong>{{ report.pageAnalysis.totalScripts }}</strong></div>
         <div class="col-md-4"><span class="emoji">🎬</span>JS: <strong>{{ report.breakdown.js }}</strong></div>
@@ -156,10 +156,9 @@
 
     <h3 class="mt-5">💡 Recommendations</h3>
     <ul class="list-unstyled">
-        {% for suggestion in suggestions %}
-            <li><span class="emoji">✅</span>{{ suggestion }}</li>
-        {% endfor %}
-    </ul>
-
+    {% for suggestion in suggestions %}
+        <li><span class="emoji">✅</span> <strong style="font-weight: bold;">{{ suggestion }}</strong></li>
+    {% endfor %}
+</ul>
 </body>
 </html>

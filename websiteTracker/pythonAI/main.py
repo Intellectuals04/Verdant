@@ -29,6 +29,7 @@ def generate_ai_suggestions(report):
     prompt = f"""
     Analyze this website audit report and give 3-5 clear actionable suggestions to improve
     performance, reduce carbon emissions, and make the site more eco-friendly. The suggestions should be short, concise, and easy to understand.
+    don't generate Hashes and stars with the response. 
 
     Report:
     {report}
@@ -83,6 +84,6 @@ async def analyze(request: Request):
         "summary": f"This website emits {chart_data['values'][0]}g CO₂ per visit. Lighthouse Score: {chart_data['values'][2]}",
         "chart_data": chart_data,
         "suggestions": ai_suggestions,
-        "report": report # ✅ ADD THIS LINE
+        "report": report #  ADD THIS LINE
     })
 
