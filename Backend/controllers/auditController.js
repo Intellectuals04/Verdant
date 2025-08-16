@@ -1,11 +1,12 @@
 // websitetracker/controllers/auditController.js
+const express = require('express');
 const { runLighthouseAudit } = require('../services/lighthouseService');
 const { scrapePageResources } = require('../services/scraperService');
 const { checkGreenHosting } = require('../services/hostingService');
 const { runEcoIndexAnalysis } = require('../services/ecoindexService');
 const { applyHeuristics } = require('../services/heuristicsService');
 const { scrapeDetailedPageData, breakdownResources } = require('../services/pageAnalysisService');
-
+const app = express();
 // Import the new Mongoose model
 const AuditReport = require('../models/AuditReport');
 // const { ConsoleMessage } = require('puppeteer'); // This import seems unused and could be removed

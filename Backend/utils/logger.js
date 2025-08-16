@@ -1,24 +1,22 @@
 // utils/logger.js
 const { createLogger, format, transports } = require("winston");
-const { combine, timestamp, printf, colorize } = format;
+const path = require("path");
 
-// Define custom log format
-const logFormat = printf(({ level, message, timestamp }) => {
-  return `[${timestamp}] ${level}: ${message}`;
-});
-
-// Create logger instance
 const logger = createLogger({
-  level: "info", // default log level (can be debug, error, warn, info)
-  format: combine(
-    colorize(),   // colorized logs for console
-    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
-    logFormat
+  level: "debug",
+  format: format.combine(
+    format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    format.errors({ stack: true }),
+    format.printf(({ timestamp, level, message, ...meta }) => {
+      return `${timestamp} [${level.toUpperCase()}]: ${message} ${
+        Object.keys(meta).length ? JSON.stringify(meta) : ""
+      }`;
+    })
   ),
   transports: [
-    new transports.Console(), // log to console
-    new transports.File({ filename: "logs/error.log", level: "error" }), // only errors
-    new transports.File({ filename: "logs/combined.log" }) // all logs
+    new transports.Console(),
+    new transports.File({ filename: path.join(__dirname, "../logs/error.log"), level: "error" }),
+    new transports.File({ filename: path.join(__dirname, "../logs/combined.log") }),
   ],
 });
 

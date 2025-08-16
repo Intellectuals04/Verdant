@@ -1,21 +1,28 @@
+// middlewares/errorHandler.js
 const logger = require("../utils/logger");
 
-// Global Error Handler Middleware
+// Global error handling middleware
 function errorHandler(err, req, res, next) {
-  // Log full error details
-  logger.error(`${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+  logger.error("🌍 Global Error Handler:", {
+    message: err.message,
+    stack: err.stack,
+    url: req.originalUrl,
+    method: req.method,
+    body: req.body,
+  });
 
-  // Optional: log stack trace only in dev mode
-  if (process.env.NODE_ENV !== "production") {
-    logger.error(err.stack);
+  // Handle specific errors
+  if (err.name === "ValidationError") {
+    return res.status(400).json({ error: "Validation Error", details: err.message });
   }
 
-  // Default status code
-  const statusCode = err.statusCode || 500;
+  if (err.name === "MongoServerError") {
+    return res.status(500).json({ error: "Database Error", details: err.message });
+  }
 
-  res.status(statusCode).json({
-    success: false,
-    message: err.message || "Internal Server Error",
+  // Default fallback
+  res.status(err.status || 500).json({
+    error: err.message || "Internal Server Error",
   });
 }
 
