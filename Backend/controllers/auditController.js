@@ -10,6 +10,11 @@ const { scrapeDetailedPageData, breakdownResources } = require('../services/page
 const AuditReport = require('../models/AuditReport');
 // const { ConsoleMessage } = require('puppeteer'); // This import seems unused and could be removed
 const logger = require("../utils/logger");
+const AppError = require("../utils/AppError");
+
+app.get("/notfound", (req, res, next) => {
+  next(new AppError("Resource not found", 404));
+});
 
 exports.getAuditReport = (req, res) => {
   try {

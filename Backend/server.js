@@ -12,6 +12,8 @@ const logger = require("./utils/logger");
 const { port, greenWebAPI, mongoURI } = require('./config/config');
 const auditRoutes = require('./routes/auditRoutes');
 const footprintRoutes = require('./routes/footprintRoutes');
+const errorHandler = require("./middlewares/errorHandler");
+
 
 app.use(
   morgan("combined", {
@@ -20,6 +22,8 @@ app.use(
     },
   })
 );
+// Global error handler (last middleware)
+app.use(errorHandler);
 // Proxy to FastAPI
 app.use('/report', createProxyMiddleware({
   target: 'http://127.0.0.1:8001',
