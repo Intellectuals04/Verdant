@@ -15,8 +15,8 @@ const logger = createLogger({
   ),
   transports: [
     new transports.Console(),
-    new transports.File({ filename: path.join(__dirname, "../logs/error.log"), level: "error" }),
-    new transports.File({ filename: path.join(__dirname, "../logs/combined.log") }),
+    new transports.File({ filename: path.join(__dirname, "../logs/error.log"), level: "error" }), // This will only write logs with a level of 'error' or higher
+    new transports.File({ filename: path.join(__dirname, "../logs/combined.log"), level: "info" }), // This will write all logs from 'info' level up to 'error'
   ],
 });
 

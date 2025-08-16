@@ -22,8 +22,20 @@ app.use(express.json());
 // HTTP request logging via morgan + winston
 app.use(
   morgan("combined", {
+    // Log only successful requests (status < 400) to the info level
+    skip: (req, res) => res.statusCode >= 400,
     stream: {
       write: (message) => logger.info(message.trim()),
+    },
+  })
+);
+
+app.use(
+  morgan("combined", {
+    // Log only requests with an error status (status >= 400) to the error level
+    skip: (req, res) => res.statusCode < 400,
+    stream: {
+      write: (message) => logger.error(message.trim()),
     },
   })
 );
