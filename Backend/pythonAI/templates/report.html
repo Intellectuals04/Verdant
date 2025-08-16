@@ -47,10 +47,29 @@
         }
     </style>
 </head>
-<body class="container py-5">
+<body>
+    <nav class="navbar navbar-expand-lg  shadow-sm" style="background-color: #0b342e;">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="#">Verdant</a>
+    <button class="navbar-toggler text-white " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link text-white" href="../index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../websitetracker/">Audit</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../login.html">Sign-In</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="../about.html">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-5">
 
     <header class="text-center mb-5">
-        <h1 class="display-4 fw-bold">🌐 Website Audit Report</h1>
+        <h1 class="display-5 fw-bold" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Website Audit Report</h1>
         <p class="lead text-muted">Analysis for <a href="{{ report.url }}" class="text-decoration-none">{{ report.url }}</a></p>
     </header>
 
@@ -61,7 +80,7 @@
             <div class="col-md-4">
                 <div class="card h-100 bg-custom-green">
                     <div class="card-body">
-                        <h2 class="card-title display-5 fw-bold">{{ report.carbonAnalysis.co2PerVisit | round(5) }}g</h2>
+                        <h2 class="card-title display-6 fw-bold">{{ report.carbonAnalysis.co2PerVisit | round(5) }}g</h2>
                         <p class="card-text fw-semibold">CO₂ per visit</p>
                     </div>
                 </div>
@@ -69,7 +88,7 @@
             <div class="col-md-4">
                 <div class="card h-100 bg-custom-info">
                     <div class="card-body">
-                        <h2 class="card-title display-5 fw-bold">{{ report.carbonAnalysis.cleanerThan }}</h2>
+                        <h2 class="card-title display-6 fw-bold">{{ report.carbonAnalysis.cleanerThan }}</h2>
                         <p class="card-text fw-semibold">Cleaner Than</p>
                     </div>
                 </div>
@@ -77,7 +96,7 @@
             <div class="col-md-4">
                 <div class="card h-100 {% if report.lighthouseScore < 50 %}bg-custom-danger{% else %}bg-custom-warning{% endif %}">
                     <div class="card-body">
-                        <h2 class="card-title display-5 fw-bold">{{ report.lighthouseScore }}</h2>
+                        <h2 class="card-title display-6 fw-bold">{{ report.lighthouseScore }}</h2>
                         <p class="card-text fw-semibold">Lighthouse Score</p>
                     </div>
                 </div>
@@ -86,7 +105,14 @@
     </section>
 
     <hr class="my-4">
-
+     <h3 class="mt-5">💡 Recommendations</h3>
+    <ul class="list-unstyled">
+    {% for suggestion in suggestions %}
+        <li><span class="emoji">✅</span> <strong style="font-weight: bold;">{{ suggestion }}</strong></li>
+    {% endfor %}
+</ul>
+<br>
+<hr class="my-4">
     <section class="mb-5">
         <h3 class="mb-4 text-center">📊 Resource Breakdown</h3>
         <div class="row g-4 text-center">
@@ -141,6 +167,7 @@
         </div>
     </div>
 <br>
+<hr class="my-4">
     <h3 class="mb-3 text-center">📊 Resource Data</h3>
     <div class="row">
         <div> <strong>{{ report.resourceData.documents }}</strong></div>
@@ -153,12 +180,9 @@
         <div class="col-md-4"><span class="emoji">🔤</span>Videos: <strong>{{ report.breakdown.videos }}</strong></div>
         <div class="col-md-4"><span class="emoji">🔤</span>Others: <strong>{{ report.breakdown.others }}</strong></div>
     </div>
-
-    <h3 class="mt-5">💡 Recommendations</h3>
-    <ul class="list-unstyled">
-    {% for suggestion in suggestions %}
-        <li><span class="emoji">✅</span> <strong style="font-weight: bold;">{{ suggestion }}</strong></li>
-    {% endfor %}
-</ul>
+</div>
+<br>
+<br>
+   
 </body>
 </html>
