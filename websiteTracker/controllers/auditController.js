@@ -9,6 +9,17 @@ const { scrapeDetailedPageData, breakdownResources } = require('../services/page
 // Import the new Mongoose model
 const AuditReport = require('../models/AuditReport');
 // const { ConsoleMessage } = require('puppeteer'); // This import seems unused and could be removed
+const logger = require("../utils/logger");
+
+exports.getAuditReport = (req, res) => {
+  try {
+    logger.info("Audit report requested");
+    res.json({ msg: "Audit report generated" });
+  } catch (err) {
+    logger.error("Error generating report: " + err.message);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
 
 exports.auditWebsite = async (req, res) => {
     try {

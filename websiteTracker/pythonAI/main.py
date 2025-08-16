@@ -27,9 +27,10 @@ model = genai.GenerativeModel("gemini-2.5-pro")
 
 def generate_ai_suggestions(report):
     prompt = f"""
-    Analyze this website audit report and give 3-5 clear actionable suggestions to improve
+    Analyze this website audit report and give 7-8 clear actionable suggestions of 2 lines to improve
     performance, reduce carbon emissions, and make the site more eco-friendly. The suggestions should be short, concise, and easy to understand.
-    don't generate Hashes and stars with the response. 
+    don't generate Hashes and stars with the response and don't use any markdown formatting.
+    don't generate the title, just the suggestions.
 
     Report:
     {report}

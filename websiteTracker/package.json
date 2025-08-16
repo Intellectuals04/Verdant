@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "axios": "^1.11.0",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
@@ -19,7 +20,10 @@
     "http-proxy-middleware": "^3.0.5",
     "lighthouse": "^11.5.0",
     "mongoose": "^8.16.4",
+    "morgan": "^1.10.1",
     "nodemon": "^3.1.10",
-    "puppeteer": "^24.14.0"
+    "openai": "^5.12.2",
+    "puppeteer": "^24.14.0",
+    "winston": "^3.17.0"
   }
 }

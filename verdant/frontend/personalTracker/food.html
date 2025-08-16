@@ -281,6 +281,10 @@
   </div> <!-- End row -->
 </div> <!-- End container -->
 
+<div class="container my-5">
+        <div id="results" class="result-box d-none"></div>
+      </div>
+
     <!-- Article Section -->
 
     <div class="container my-5">
@@ -366,71 +370,118 @@
   </div>
 
 <script>
-   const mainSelect = document.getElementById("mainSelect");
+    document.addEventListener("DOMContentLoaded", function () {
+        const mainSelect = document.getElementById("mainSelect");
+        const vegetarianSection = document.getElementById("vegetarianSection");
+        const nonVegSection = document.getElementById("nonVegSection");
+        const resultsDiv = document.getElementById("results");
 
-const vegetarianSection = document.getElementById("vegetarianSection");
-const nonVegSection = document.getElementById("nonVegSection");
+        // Event listener for the main dropdown
+        mainSelect.addEventListener("change", function () {
+            vegetarianSection.classList.add("d-none");
+            nonVegSection.classList.add("d-none");
+            resultsDiv.classList.add("d-none");
 
-// Show relevant section based on selection
-mainSelect.addEventListener("change", function () {
-  const value = this.value;
+            if (this.value === "clothing") {
+                vegetarianSection.classList.remove("d-none");
+            } else if (this.value === "grocery") {
+                nonVegSection.classList.remove("d-none");
+            }
+        });
 
-  vegetarianSection.classList.add("d-none");
-  nonVegSection.classList.add("d-none");
+        // Function to add a new row
+        function addRow(containerId) {
+            const container = document.getElementById(containerId);
+            const firstRow = container.querySelector(".ingredient-row");
+            const newRow = firstRow.cloneNode(true);
+            newRow.querySelectorAll("input").forEach(input => input.value = "");
+            newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
+            container.appendChild(newRow);
 
-  if (value === "clothing") vegetarianSection.classList.remove("d-none");
-  else if (value === "grocery") nonVegSection.classList.remove("d-none");
-});
+            const removeBtn = newRow.querySelector('.remove-btn');
+            if (removeBtn) {
+                removeBtn.style.display = 'inline-block';
+                removeBtn.addEventListener('click', () => {
+                    newRow.remove();
+                });
+            }
+        }
 
-// Remove functionality
-document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('remove-btn')) {
-    const row = e.target.closest('.ingredient-row');
-    if (row) row.remove();
-  }
-});
-
-// Add more functionality for Vegetarian
-document.getElementById("addVegetarian").addEventListener("click", function () {
-  const fields = document.getElementById("vegetarianFields");
-  const firstRow = fields.querySelector(".ingredient-row");
-  const newRow = firstRow.cloneNode(true);
-
-  newRow.querySelectorAll("input").forEach(input => input.value = "");
-  newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
-
-  fields.appendChild(newRow);
-
-  const removeBtn = newRow.querySelector('.remove-btn');
-  if (removeBtn) removeBtn.style.display = 'inline-block';
-});
-
-// Add more functionality for Non-Vegetarian
-document.getElementById("addNonVeg").addEventListener("click", function () {
-  const fields = document.getElementById("nonVegFields");
-  const firstRow = fields.querySelector(".ingredient-row");
-  const newRow = firstRow.cloneNode(true);
-
-  newRow.querySelectorAll("input").forEach(input => input.value = "");
-  newRow.querySelectorAll("select").forEach(select => select.selectedIndex = 0);
-
-  fields.appendChild(newRow);
-
-  const removeBtn = newRow.querySelector('.remove-btn');
-  if (removeBtn) removeBtn.style.display = 'inline-block';
-});
-
-// Hide remove button on first static row
-document.addEventListener('DOMContentLoaded', function () {
-  const firstRemoveBtnVeg = document.querySelector('#vegetarianFields .ingredient-row .remove-btn');
-  if (firstRemoveBtnVeg) firstRemoveBtnVeg.style.display = 'none';
-
-  const firstRemoveBtnNonVeg = document.querySelector('#nonVegFields .ingredient-row .remove-btn');
-  if (firstRemoveBtnNonVeg) firstRemoveBtnNonVeg.style.display = 'none';
-});
+        // Add row listeners
+        document.getElementById("addVegetarian").addEventListener("click", () => addRow("vegetarianFields"));
+        document.getElementById("addNonVeg").addEventListener("click", () => addRow("nonVegFields"));
+        
+        // Hide remove button on initial rows
+        document.querySelectorAll('.ingredient-row .remove-btn').forEach(btn => btn.style.display = 'none');
 
 
-  </script>
+        // Function to handle form submission
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            resultsDiv.classList.add("d-none");
+            resultsDiv.innerHTML = `<p>Calculating...</p>`;
+            resultsDiv.classList.remove("d-none");
+
+            const inputs = [];
+            const rows = form.querySelectorAll(".ingredient-row");
+            rows.forEach(row => {
+                const item = row.querySelector("select[name='ingredient[]']").value;
+                const quantity = row.querySelector("input[name='Quantity[]']").value;
+                const unit = row.querySelector("select[name='weightUnit[]']").value;
+                if (item && quantity && unit) {
+                    inputs.push({
+                        type: item,
+                        quantity: parseFloat(quantity),
+                        unit: unit
+                    });
+                }
+            });
+
+            try {
+                const response = await fetch("/api/v1/footprint/food", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ inputs }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    let suggestionsHTML = result.data.suggestions
+                        .map(
+                            (s) =>
+                            `<li><strong>${s.title}:</strong> ${s.description}</li>`
+                        )
+                        .join("");
+
+                    resultsDiv.innerHTML = `
+                        <h4 class="fw-bold" style="color: #0b342e;">Your Food Footprint:</h4>
+                        <p style="font-size: 2rem; font-weight: bold; color: #0b342e;">${result.data.footprint.toFixed(
+                            2
+                        )} kg CO₂e</p>
+                        <h5 class="mt-4 fw-bold" style="color: #0b342e;">Personalized Suggestions:</h5>
+                        <ul>${suggestionsHTML}</ul>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `<p class="text-danger">Error: ${result.message}</p>`;
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                resultsDiv.innerHTML = `<p class="text-danger">A network error occurred. Please try again.</p>`;
+            } finally {
+                submitBtn.disabled = false;
+                resultsDiv.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+
+        // Attach event listeners to both forms
+        document.querySelector("#vegetarianSection form").addEventListener("submit", handleFormSubmit);
+        document.querySelector("#nonVegSection form").addEventListener("submit", handleFormSubmit);
+    });
+</script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

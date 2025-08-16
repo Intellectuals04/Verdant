@@ -2,36 +2,45 @@
 require('dotenv').config(); // Load environment variables FIRST
 
 const express = require('express');
+const morgan = require("morgan");
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const logger = require("./utils/logger");
+const { port, greenWebAPI, mongoURI } = require('./config/config');
+const auditRoutes = require('./routes/auditRoutes');
+const footprintRoutes = require('./routes/footprintRoutes');
 
+app.use(
+  morgan("combined", {
+    stream: {
+      write: (message) => logger.info(message.trim()),
+    },
+  })
+);
 // Proxy to FastAPI
 app.use('/report', createProxyMiddleware({
   target: 'http://127.0.0.1:8001',
   changeOrigin: true
 }));
-
-
-// Now, safely import from config.js after dotenv has run
-const { port, greenWebAPI, mongoURI } = require('./config/config');
-const auditRoutes = require('./routes/auditRoutes');
+// Error handling middleware
+app.use((err, req, res, next) => {
+  logger.error(`${err.message} - ${req.originalUrl}`);
+  res.status(500).json({ error: "Internal Server Error" });
+});
 
 // --- Debugging: Check if mongoURI is loaded ---
-console.log('DEBUG: mongoURI from config:', mongoURI);
+logger.debug(`DEBUG: mongoURI from config: ${mongoURI}`);
 if (!mongoURI) {
-    console.error('CRITICAL ERROR: MONGODB_URI is not defined in your .env file or config.js');
-    process.exit(1); // Exit the process if URI is missing
+  logger.error('CRITICAL ERROR: MONGODB_URI is not defined in your .env file or config.js');
+  process.exit(1); 
 }
-// ---------------------------------------------
-
-
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('❌ MongoDB connection error:', err.message)); // Log only the message for clarity
+  .then(() => logger.info('✅ MongoDB connected'))
+  .catch(err => logger.error(`❌ MongoDB connection error: ${err.message}`));
 
 app.use(cors());
 app.use(express.json());
@@ -40,9 +49,9 @@ app.use(express.static(path.join(__dirname, '../', 'verdant', 'frontend')));
 
 // API routes
 app.use('/api', auditRoutes);
-
+app.use('/api/v1/footprint', footprintRoutes)
 app.listen(port, () => {
-  console.log(`🚀 Server running on http://localhost:${port}`);
+  logger.info(`🚀 Server running on http://localhost:${port}`);
 });
 app.get('/',(req,res)=>{
   res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'index.html'));
@@ -65,31 +74,3 @@ app.get('/personalTracker/shopping',(req,res)=>{
 app.get('/personalTracker/transport',(req,res)=>{
   res.sendFile(path.join(__dirname, '../', 'verdant', 'frontend', 'personalTracker','public','transport.html'));
 }) */
-app.post('/personalTracker/energy', (req, res) => {
-  const userQuery = req.body.query;
-
-  const ragResponse = "This is a placeholder response for your RAG model.";
-
-  res.json({ response: ragResponse });
-});
-app.post('/personalTracker/food', (req, res) => {
-  const userQuery = req.body.query;
-
-  const ragResponse = "This is a placeholder response for your RAG model.";
-
-  res.json({ response: ragResponse });
-});
-app.post('/personalTracker/shopping', (req, res) => {
-  const userQuery = req.body.query;
-
-  const ragResponse = "This is a placeholder response for your RAG model.";
-
-  res.json({ response: ragResponse });
-});
-app.post('/personalTracker/transportation', (req, res) => {
-  const userQuery = req.body.query;
-
-  const ragResponse = "This is a placeholder response for your RAG model.";
-
-  res.json({ response: ragResponse });
-});
