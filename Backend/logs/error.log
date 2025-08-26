@@ -1,0 +1,1 @@
+2025-08-22 14:22:47 [ERROR]: ❌ MongoDB connection error: connection 1 to 34.93.44.191:27017 timed out {"error":{"errorLabelSet":{},"beforeHandshake":true,"connectionGeneration":0}}

@@ -25,22 +25,46 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 model = genai.GenerativeModel("gemini-2.5-pro")
 
+# ✅ Summarize the report before sending to Gemini
+def summarize_report(report: dict) -> dict:
+    """
+    Extract only the most important fields from the audit report
+    so the AI doesn't get overloaded with tokens.
+    """
+    return {
+        "url": report.get("url"),
+        "carbonAnalysis": report.get("carbonAnalysis"),
+        "lighthouseScore": report.get("lighthouseScore"),
+        "breakdown": report.get("breakdown"),
+        "greenHosting": report.get("greenHosting"),
+        # Include top 5 heaviest resources only
+        "topResources": sorted(
+            report.get("resourceData", []),
+            key=lambda r: r.get("size", 0),
+            reverse=True
+        )[:5]
+    }
+
 def generate_ai_suggestions(report):
     prompt = f"""
-    Analyze this website audit report and give 7-8 clear actionable suggestions of 2 lines to improve
-    performance, reduce carbon emissions, and make the site more eco-friendly. The suggestions should be short, concise, and easy to understand.
-    don't generate Hashes and stars with the response and don't use any markdown formatting.
-    don't generate the title, just the suggestions.
+    Analyze this website audit report and give 7-8 clear actionable suggestions of 2 lines
+    to improve performance, reduce carbon emissions, and make the site more eco-friendly.
+    The suggestions should be short, concise, and easy to understand.
+    Don't use hashes, stars, or markdown formatting.
+    Just return the suggestions.
 
     Report:
     {report}
     """
 
     response = model.generate_content(prompt)
-    suggestions_text = response.text.strip()
-    return [line.strip("-\u2022 ") for line in suggestions_text.split("\n") if line.strip()]
 
-# ... (rest of the file remains the same)
+    # ✅ Fix: safely handle empty responses
+    if response.candidates and response.candidates[0].content.parts:
+        suggestions_text = response.text.strip()
+        return [line.strip("-• ") for line in suggestions_text.split("\n") if line.strip()]
+    else:
+        return ["No AI suggestions generated."]
 
 @app.get("/", response_class=HTMLResponse)
 async def analyze(request: Request):
@@ -61,10 +85,13 @@ async def analyze(request: Request):
             "summary": "No report found",
             "chart_data": {},
             "suggestions": [],
-            "report": {} # ✅ This line is already correct for the 'no report' case
+            "report": {}
         })
 
-    # ✅ Extract metrics
+    # ✅ Summarize the report before passing to AI
+    short_report = summarize_report(report)
+
+    # ✅ Extract metrics for chart
     co2 = report["carbonAnalysis"].get("co2PerVisit", 0)
     lighthouse = report.get("lighthouseScore", 0)
     total_size = sum([r["size"] for r in report.get("resourceData", [])]) / (1024 * 1024)  # Convert bytes to MB
@@ -78,13 +105,13 @@ async def analyze(request: Request):
         ]
     }
 
-    ai_suggestions = generate_ai_suggestions(report)
+    # ⬅️ Pass summarized report to AI
+    ai_suggestions = generate_ai_suggestions(short_report)
 
     return templates.TemplateResponse("report.html", {
         "request": request,
         "summary": f"This website emits {chart_data['values'][0]}g CO₂ per visit. Lighthouse Score: {chart_data['values'][2]}",
         "chart_data": chart_data,
         "suggestions": ai_suggestions,
-        "report": report #  ADD THIS LINE
+        "report": report  # full report still available for frontend
     })
-
