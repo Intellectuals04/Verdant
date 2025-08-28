@@ -5,104 +5,137 @@ const openai = new OpenAI({
 });
 
 exports.getFootprintAnalysis = async (userData, category) => {
+  if (!userData || !userData.inputs) {
+    throw new Error("Invalid user data provided.");
+  }
+
   const userDataString = JSON.stringify(userData.inputs, null, 2);
+
   let prompt = '';
-  let systemMessage = 'You are an expert carbon footprint calculator that responds only in valid JSON format.';
+  const systemMessage = 'You are an expert carbon footprint calculator. Respond ONLY in valid JSON format as per instructions.';
 
   switch (category) {
     case 'energy':
       prompt = `
-        You are an expert carbon footprint calculator. Analyze the following energy consumption data to calculate the total carbon footprint and provide actionable suggestions.
+Analyze the following energy consumption data and calculate total carbon footprint in kg CO2e.
+Use these emission factors:
+- Electricity (India): 0.82 kg CO2e/kWh
+- LPG: 2.98 kg CO2e/liter
+- PNG: 2.03 kg CO2e/scm
+- Petrol: 2.31 kg CO2e/liter
+- Diesel: 2.68 kg CO2e/liter
+- CNG: 2.75 kg CO2e/kg
 
-        **User Data (in JSON format):**
-        ${userDataString}
+Provide 3 actionable suggestions based on highest consumption.
 
-        **Your Task:**
-        1.  **Calculate:** Calculate the total carbon footprint in kilograms of CO2 equivalent (kg CO2e). Iterate through each item. Use these emission factors: Electricity (India): 0.71 kg CO2e/kWh, LPG: 2.9 kg CO2e/kg, Petrol: 2.3 kg CO2e/liter, PNG: 2.04 kg CO2e/scm. Sum all calculated values to get a final total.
-        2.  **Suggest:** Based on the user's highest consumption, provide 3 personalized and actionable suggestions to reduce their footprint.
-        3.  **Format Output:** Return your response ONLY as a valid JSON object. Do not include any other text or markdown formatting.
+User Data:
+${userDataString}
 
-        **JSON Structure:**
-        {
-          "carbonFootprintKg": <number>,
-          "suggestions": [
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" }
-          ]
-        }
+Return ONLY this JSON format:
+{
+  "carbonFootprintKg": <number>,
+  "suggestions": [
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" }
+  ]
+}
       `;
       break;
 
     case 'food':
       prompt = `
-        You are an expert carbon footprint calculator. Analyze the following food consumption data to calculate the total carbon footprint and provide actionable suggestions.
+Analyze the following food consumption data and calculate total carbon footprint in kg CO2e.
+Use these emission factors:
+- Beef: 27.0 kg CO2e/kg
+- Lamb: 39.0 kg CO2e/kg
+- Chicken: 6.0 kg CO2e/kg
+- Fish: 5.0 kg CO2e/kg
+- Eggs: 4.0 kg CO2e/kg
+- Cheese: 8.0 kg CO2e/kg
+- Yogurt: 1.2 kg CO2e/kg
+- Tofu: 2.0 kg CO2e/kg
+- Paneer: 3.0 kg CO2e/kg
 
-        **User Data (in JSON format):**
-        ${userDataString}
+Provide 3 actionable suggestions based on highest consumption.
 
-        **Your Task:**
-        1.  **Calculate:** Calculate the total carbon footprint in kilograms of CO2 equivalent (kg CO2e). Use these sample emission factors: Beef: 27 kg CO2e/kg, Lamb: 39.2 kg CO2e/kg, Chicken: 6.9 kg CO2e/kg, Fish (farmed): 5.1 kg CO2e/kg, Dairy: 3.4 kg CO2e/kg, Tofu: 2.0 kg CO2e/kg.
-        2.  **Suggest:** Based on the user's highest consumption, provide 3 personalized and actionable suggestions to reduce their footprint.
-        3.  **Format Output:** Return your response ONLY as a valid JSON object.
+User Data:
+${userDataString}
 
-        **JSON Structure:**
-        {
-          "carbonFootprintKg": <number>,
-          "suggestions": [
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" }
-          ]
-        }
+Return ONLY this JSON format:
+{
+  "carbonFootprintKg": <number>,
+  "suggestions": [
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" }
+  ]
+}
       `;
       break;
 
     case 'shopping':
       prompt = `
-        You are an expert carbon footprint calculator. Analyze the following shopping data to calculate the total carbon footprint and provide actionable suggestions.
+Analyze the following shopping data and calculate total carbon footprint in kg CO2e.
+Use these emission factors for electronics and clothing:
+Electronics:
+- Smartphone: 70 kg CO2e
+- Laptop: 200 kg CO2e
+- Television: 400 kg CO2e
+- Washing Machine: 500 kg CO2e
 
-        **User Data (in JSON format):**
-        ${userDataString}
+Clothing per kg material:
+- Cotton: 15.0 kg CO2e
+- Polyester: 20.0 kg CO2e
+- Denim: 30.0 kg CO2e
 
-        **Your Task:**
-        1.  **Calculate:** Estimate the total carbon footprint in kilograms of CO2 equivalent (kg CO2e). Use these sample factors per USD spent: New electronics: 1.5 kg CO2e/USD, New clothes (fast fashion): 2.0 kg CO2e/USD, Second-hand items: 0.2 kg CO2e/USD.
-        2.  **Suggest:** Based on the user's highest consumption, provide 3 personalized and actionable suggestions to reduce their footprint.
-        3.  **Format Output:** Return your response ONLY as a valid JSON object.
+For items in USD spent:
+- New electronics: 3.0 kg CO2e/USD
+- New clothes: 4.0 kg CO2e/USD
+- Second-hand items: 0.1 kg CO2e/USD
 
-        **JSON Structure:**
-        {
-          "carbonFootprintKg": <number>,
-          "suggestions": [
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" }
-          ]
-        }
+Provide 3 actionable suggestions based on highest consumption.
+
+User Data:
+${userDataString}
+
+Return ONLY this JSON format:
+{
+  "carbonFootprintKg": <number>,
+  "suggestions": [
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" }
+  ]
+}
       `;
       break;
 
     case 'transport':
       prompt = `
-        You are an expert carbon footprint calculator. Analyze the following transport data to calculate the total carbon footprint and provide actionable suggestions.
+Analyze the following transport data and calculate total carbon footprint in kg CO2e.
+Use these emission factors per km:
+- Car (Petrol): 0.15 kg CO2e/km
+- Bus (City): 0.08 kg CO2e/km
+- Train (Electric): 0.03 kg CO2e/km
+- Domestic Flight: 0.18 kg CO2e/km
+- Intl Short-haul Flight: 0.16 kg CO2e/km
+- Intl Long-haul Flight: 0.14 kg CO2e/km
 
-        **User Data (in JSON format):**
-        ${userDataString}
+Provide 3 actionable suggestions based on highest consumption.
 
-        **Your Task:**
-        1.  **Calculate:** Calculate the total carbon footprint in kilograms of CO2 equivalent (kg CO2e). Use these sample factors per kilometer: Car (petrol): 0.21 kg CO2e/km, Bus: 0.1 kg CO2e/km, Train: 0.04 kg CO2e/km, Short-haul flight: 0.25 kg CO2e/km, Long-haul flight: 0.18 kg CO2e/km.
-        2.  **Suggest:** Based on the user's highest consumption, provide 3 personalized and actionable suggestions to reduce their footprint.
-        3.  **Format Output:** Return your response ONLY as a valid JSON object.
+User Data:
+${userDataString}
 
-        **JSON Structure:**
-        {
-          "carbonFootprintKg": <number>,
-          "suggestions": [
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" },
-            { "title": "<string>", "description": "<string>" }
-          ]
-        }
+Return ONLY this JSON format:
+{
+  "carbonFootprintKg": <number>,
+  "suggestions": [
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" },
+    { "title": "<string>", "description": "<string>" }
+  ]
+}
       `;
       break;
 
@@ -115,13 +148,16 @@ exports.getFootprintAnalysis = async (userData, category) => {
       model: 'gpt-4o-mini',
       messages: [
         { role: 'system', content: systemMessage },
-        { role: 'user', content: prompt }
+        { role: 'user', content: prompt },
       ],
-      response_format: { type: "json_object" },
     });
 
     const jsonString = chatCompletion.choices[0].message.content;
-    const aiResponse = JSON.parse(jsonString);
+
+    // Extract JSON safely
+    const match = jsonString.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("No JSON found in AI response");
+    const aiResponse = JSON.parse(match[0]);
 
     return {
       carbonFootprintKg: aiResponse.carbonFootprintKg,
@@ -130,6 +166,6 @@ exports.getFootprintAnalysis = async (userData, category) => {
 
   } catch (error) {
     console.error(`Error calling OpenAI API for ${category}:`, error);
-    throw new Error('Failed to get analysis from Gen AI model.');
+    throw new Error('Failed to get analysis from AI model.');
   }
 };
