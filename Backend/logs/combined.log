@@ -577,3 +577,46 @@
 2025-08-28 11:47:42 [INFO]: Received footprint calculation request for category: food 
 2025-08-28 11:47:45 [INFO]: Successfully calculated footprint for food. Footprint: 0 
 2025-08-28 11:47:45 [INFO]: ::1 - - [28/Aug/2025:06:17:45 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 648 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:18 [INFO]: 🚀 Server running on http://localhost:3000 
+2025-08-28 11:52:19 [INFO]: ✅ MongoDB connected 
+2025-08-28 11:52:25 [INFO]: ::1 - - [28/Aug/2025:06:22:25 +0000] "GET /personalTracker/food.html HTTP/1.1" 304 - "http://localhost:3000/personalTracker/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:25 [INFO]: ::1 - - [28/Aug/2025:06:22:25 +0000] "GET /images/food1.png HTTP/1.1" 304 - "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:25 [INFO]: ::1 - - [28/Aug/2025:06:22:25 +0000] "GET /images/food5.png HTTP/1.1" 304 - "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:25 [INFO]: ::1 - - [28/Aug/2025:06:22:25 +0000] "GET /images/food3.png HTTP/1.1" 304 - "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:25 [INFO]: ::1 - - [28/Aug/2025:06:22:25 +0000] "GET /images/zim2.png HTTP/1.1" 304 - "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:37 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:52:40 [INFO]: Successfully calculated footprint for food. Footprint: 1872 
+2025-08-28 11:52:40 [INFO]: ::1 - - [28/Aug/2025:06:22:40 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 518 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:49 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:52:52 [INFO]: Successfully calculated footprint for food. Footprint: 0 
+2025-08-28 11:52:52 [INFO]: ::1 - - [28/Aug/2025:06:22:52 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 586 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:52:58 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:53:00 [INFO]: Successfully calculated footprint for food. Footprint: 0 
+2025-08-28 11:53:00 [INFO]: ::1 - - [28/Aug/2025:06:23:00 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 527 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:53:05 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:53:09 [INFO]: Successfully calculated footprint for food. Footprint: 0 
+2025-08-28 11:53:09 [INFO]: ::1 - - [28/Aug/2025:06:23:09 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 692 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:53:14 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:53:39 [INFO]: Successfully calculated footprint for food. Footprint: 0 
+2025-08-28 11:53:39 [INFO]: ::1 - - [28/Aug/2025:06:23:39 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 518 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:53:50 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:53:54 [INFO]: Successfully calculated footprint for food. Footprint: 72 
+2025-08-28 11:53:54 [INFO]: ::1 - - [28/Aug/2025:06:23:54 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 643 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:54:16 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:54:19 [INFO]: Successfully calculated footprint for food. Footprint: 6 
+2025-08-28 11:54:19 [INFO]: ::1 - - [28/Aug/2025:06:24:19 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 620 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:55:21 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:55:24 [INFO]: Successfully calculated footprint for food. Footprint: 6 
+2025-08-28 11:55:24 [INFO]: ::1 - - [28/Aug/2025:06:25:24 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 484 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:55:31 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:55:35 [INFO]: Successfully calculated footprint for food. Footprint: 5 
+2025-08-28 11:55:35 [INFO]: ::1 - - [28/Aug/2025:06:25:35 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 483 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:56:03 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:56:08 [INFO]: Successfully calculated footprint for food. Footprint: 0.003 
+2025-08-28 11:56:08 [INFO]: ::1 - - [28/Aug/2025:06:26:08 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 630 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:56:20 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:56:24 [INFO]: Successfully calculated footprint for food. Footprint: 3 
+2025-08-28 11:56:24 [INFO]: ::1 - - [28/Aug/2025:06:26:24 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 591 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
+2025-08-28 11:56:34 [INFO]: Received footprint calculation request for category: food 
+2025-08-28 11:56:39 [INFO]: Successfully calculated footprint for food. Footprint: 0.75 
+2025-08-28 11:56:39 [INFO]: ::1 - - [28/Aug/2025:06:26:39 +0000] "POST /api/v1/footprint/food HTTP/1.1" 200 574 "http://localhost:3000/personalTracker/food.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" 
