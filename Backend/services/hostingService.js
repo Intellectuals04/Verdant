@@ -1,5 +1,5 @@
-const axios = require('axios');
-const { greenWebAPI } = require('../config/config');
+const axios = require("axios");
+const { greenWebAPI } = require("../config/config");
 
 exports.checkGreenHosting = async (url) => {
   const domain = new URL(url).hostname;
